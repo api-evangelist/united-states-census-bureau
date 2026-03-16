@@ -8,8 +8,8 @@ image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jp
 url: >-
   https://raw.githubusercontent.com/api-search/us-federal-government/main/_apis/united-states-census-bureau/apis.md
 created: 2024/01/01
-modified: 2024/01/01
-specificationVersion: '0.16'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 tags: []
 apis:
   - name: United States Census Bureau (Census) API
@@ -30,7 +30,6 @@ common:
   - type: Property
     url: https://example.com
 maintainers:
-  - FN: API Evangelist
-    url: http://apievangelist.com
-    email: info@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 aid: united-states-census-bureau-census
