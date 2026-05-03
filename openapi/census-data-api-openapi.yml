@@ -1,0 +1,666 @@
+openapi: 3.1.0
+info:
+  title: Census Data API
+  description: >-
+    The United States Census Bureau Data API provides programmatic access to
+    statistical data from Census Bureau surveys and datasets. The API covers
+    demographic, economic, housing, and social data through a query-based
+    interface. Key datasets include the American Community Survey (ACS),
+    Decennial Census, Population Estimates, County Business Patterns, and
+    many more. Users can query data by geographic level (national, state,
+    county, tract, block group) and filter by hundreds of statistical variables.
+    An API key is optional (up to 500 requests/day without one) but required
+    for higher usage.
+  version: 2.0.0
+  contact:
+    name: Census Developer Forum
+    url: https://www.census.gov/data/developers.html
+    email: cnmp.developers.list@census.gov
+  x-tags:
+    - Demographics
+    - Federal Government
+    - Open Data
+    - Statistics
+servers:
+  - url: https://api.census.gov/data
+    description: Census Data API
+
+tags:
+  - name: American Community Survey
+    description: ACS demographic, economic, social, and housing characteristics
+  - name: Decennial Census
+    description: Decennial Census population and housing counts
+  - name: Population Estimates
+    description: Annual population estimates and projections
+  - name: County Business Patterns
+    description: Business establishment and employment data
+  - name: Economic Census
+    description: Economic activity by industry and geography
+  - name: International
+    description: International demographic and trade data
+  - name: Geographic Services
+    description: Geocoding and geographic boundary services
+
+paths:
+  /{year}/acs/acs1:
+    get:
+      operationId: getACS1Year
+      summary: Get ACS 1-Year Data
+      description: >-
+        Returns American Community Survey 1-Year Estimates for geographies
+        with populations of 65,000 or more. Covers social, economic, demographic,
+        and housing characteristics. Data available from 2005 to present.
+      tags:
+        - American Community Survey
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: Data year (2005-2024)
+          schema:
+            type: integer
+            minimum: 2005
+            maximum: 2024
+        - name: get
+          in: query
+          required: true
+          description: >-
+            Comma-separated list of variable names to retrieve
+            (e.g., NAME,B01003_001E for name and total population).
+            Maximum 50 variables per query.
+          schema:
+            type: string
+        - name: for
+          in: query
+          required: false
+          description: >-
+            Geographic level and FIPS code filter
+            (e.g., state:01 for Alabama, county:*&in=state:06 for all CA counties)
+          schema:
+            type: string
+        - name: in
+          in: query
+          required: false
+          description: >-
+            Parent geography constraint for sub-state geographies
+            (e.g., state:06 to restrict to California)
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: false
+          description: Census API key for higher usage limits (500+ requests/day)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >-
+            2D JSON array where the first row contains variable names and
+            subsequent rows contain data values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAPIResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /{year}/acs/acs5:
+    get:
+      operationId: getACS5Year
+      summary: Get ACS 5-Year Data
+      description: >-
+        Returns American Community Survey 5-Year Estimates for all geographies
+        down to block group level. More reliable for small populations and
+        small geographies. Data available from 2009 to present.
+      tags:
+        - American Community Survey
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: End year of the 5-year period (2009-2024)
+          schema:
+            type: integer
+            minimum: 2009
+            maximum: 2024
+        - name: get
+          in: query
+          required: true
+          description: >-
+            Comma-separated variable names (e.g., NAME,B01003_001E,B19013_001E
+            for name, total population, and median household income)
+          schema:
+            type: string
+        - name: for
+          in: query
+          required: false
+          description: Geographic level and FIPS code filter
+          schema:
+            type: string
+        - name: in
+          in: query
+          required: false
+          description: Parent geography constraint
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: false
+          description: Census API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 2D JSON array of ACS 5-Year data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAPIResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /{year}/dec/pl:
+    get:
+      operationId: getDecennialPL
+      summary: Get Decennial Census Redistricting Data (P.L. 94-171)
+      description: >-
+        Returns Decennial Census redistricting data including population counts
+        by race/ethnicity and housing unit counts. Data available for 2020 and 2010.
+      tags:
+        - Decennial Census
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: Census year (2020 or 2010)
+          schema:
+            type: integer
+            enum:
+              - 2020
+              - 2010
+        - name: get
+          in: query
+          required: true
+          description: Variable names (e.g., P1_001N for total population)
+          schema:
+            type: string
+        - name: for
+          in: query
+          required: false
+          description: Geographic level and FIPS filter
+          schema:
+            type: string
+        - name: in
+          in: query
+          required: false
+          description: Parent geography constraint
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: false
+          description: Census API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 2D JSON array of decennial census data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAPIResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /{year}/pep/population:
+    get:
+      operationId: getPopulationEstimates
+      summary: Get Population Estimates
+      description: >-
+        Returns annual population estimates for states, counties, and
+        metropolitan areas. Uses births, deaths, and migration to estimate
+        population change between decennial censuses.
+      tags:
+        - Population Estimates
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: Vintage year for the estimates
+          schema:
+            type: integer
+        - name: get
+          in: query
+          required: true
+          description: >-
+            Variable names (e.g., NAME,POP,DATE_DESC for name, population,
+            and date description)
+          schema:
+            type: string
+        - name: for
+          in: query
+          required: false
+          description: Geographic level and FIPS filter
+          schema:
+            type: string
+        - name: in
+          in: query
+          required: false
+          description: Parent geography constraint
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: false
+          description: Census API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 2D JSON array of population estimates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAPIResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /{year}/cbp:
+    get:
+      operationId: getCountyBusinessPatterns
+      summary: Get County Business Patterns
+      description: >-
+        Returns annual statistics on the number of establishments, employment,
+        first quarter payroll, and annual payroll for most U.S. industries at
+        the national, state, county, and ZIP code level.
+      tags:
+        - County Business Patterns
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: Data year (1986-2022)
+          schema:
+            type: integer
+            minimum: 1986
+            maximum: 2022
+        - name: get
+          in: query
+          required: true
+          description: >-
+            Variable names (e.g., NAME,NAICS2017,ESTAB,EMP,PAYANN for
+            business name, NAICS code, establishments, employment, annual payroll)
+          schema:
+            type: string
+        - name: for
+          in: query
+          required: false
+          description: Geographic level and FIPS filter
+          schema:
+            type: string
+        - name: in
+          in: query
+          required: false
+          description: Parent geography constraint
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: false
+          description: Census API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 2D JSON array of business patterns data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAPIResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /{year}/ecnbasic:
+    get:
+      operationId: getEconomicCensus
+      summary: Get Economic Census Data
+      description: >-
+        Returns economic census data covering all major economic sectors every
+        5 years. Provides number of establishments, employment, payroll, and
+        sales/receipts by industry (NAICS) and geography.
+      tags:
+        - Economic Census
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: Economic Census year (2002, 2007, 2012, 2017, 2022)
+          schema:
+            type: integer
+            enum:
+              - 2022
+              - 2017
+              - 2012
+              - 2007
+              - 2002
+        - name: get
+          in: query
+          required: true
+          description: Variable names to retrieve
+          schema:
+            type: string
+        - name: for
+          in: query
+          required: false
+          description: Geographic level and FIPS filter
+          schema:
+            type: string
+        - name: in
+          in: query
+          required: false
+          description: Parent geography constraint
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: false
+          description: Census API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 2D JSON array of economic census data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAPIResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /{year}/intltrade/imp_exp:
+    get:
+      operationId: getInternationalTrade
+      summary: Get International Trade Data
+      description: >-
+        Returns monthly and annual statistics on U.S. imports and exports
+        by commodity, country, and port. Data available from 2010 to present.
+      tags:
+        - International
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: Data year (2010-present)
+          schema:
+            type: integer
+        - name: get
+          in: query
+          required: true
+          description: Variable names (e.g., CTY_NAME,AIR_VAL_MO for country and airborne value)
+          schema:
+            type: string
+        - name: for
+          in: query
+          required: false
+          description: Geographic filter
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: false
+          description: Census API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 2D JSON array of international trade data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAPIResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /{year}/idb/5year:
+    get:
+      operationId: getInternationalDatabase
+      summary: Get International Database
+      description: >-
+        Returns demographic data for countries and areas with populations of
+        5,000 or more. Includes historical and projected data through 2100
+        with population by age and sex, births, deaths, migration, and more.
+      tags:
+        - International
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: Data year
+          schema:
+            type: integer
+        - name: get
+          in: query
+          required: true
+          description: Variable names (e.g., NAME,POP for country name and population)
+          schema:
+            type: string
+        - name: for
+          in: query
+          required: false
+          description: Geographic filter (e.g., country:01 for Afghanistan)
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: false
+          description: Census API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 2D JSON array of international demographic data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAPIResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /geocoder/locations/onelineaddress:
+    get:
+      operationId: geocodeOnelineAddress
+      summary: Geocode One-Line Address
+      description: >-
+        Converts a one-line address string to geographic coordinates and
+        census geography identifiers (state, county, tract, block FIPS codes).
+      tags:
+        - Geographic Services
+      parameters:
+        - name: address
+          in: query
+          required: true
+          description: Full address as a single string (e.g., "4600 Silver Hill Rd, Washington DC 20233")
+          schema:
+            type: string
+        - name: benchmark
+          in: query
+          required: true
+          description: >-
+            The geocoding benchmark to use
+            (e.g., Public_AR_Current, Public_AR_Census2020)
+          schema:
+            type: string
+            default: Public_AR_Current
+        - name: vintage
+          in: query
+          required: false
+          description: >-
+            Geographic vintage for returned geography identifiers
+            (e.g., Current_Current, Census2020_Census2020)
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          description: Response format
+          schema:
+            type: string
+            enum:
+              - json
+        - name: layers
+          in: query
+          required: false
+          description: Geographic layers to include in the response
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Geocoding result with coordinates and census geography
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /geocoder/locations/address:
+    get:
+      operationId: geocodeAddress
+      summary: Geocode Structured Address
+      description: >-
+        Converts a structured address (street, city, state, ZIP) to geographic
+        coordinates and census geography identifiers.
+      tags:
+        - Geographic Services
+      parameters:
+        - name: street
+          in: query
+          required: true
+          description: Street address (e.g., "4600 Silver Hill Rd")
+          schema:
+            type: string
+        - name: city
+          in: query
+          required: false
+          description: City name
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: false
+          description: Two-character state abbreviation or FIPS code
+          schema:
+            type: string
+        - name: zip
+          in: query
+          required: false
+          description: Five-digit ZIP code
+          schema:
+            type: string
+        - name: benchmark
+          in: query
+          required: true
+          description: Geocoding benchmark to use
+          schema:
+            type: string
+            default: Public_AR_Current
+        - name: vintage
+          in: query
+          required: false
+          description: Geographic vintage for returned geography identifiers
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          description: Response format
+          schema:
+            type: string
+            enum:
+              - json
+      responses:
+        '200':
+          description: Geocoding result with coordinates and census geography
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+components:
+  schemas:
+    DataAPIResponse:
+      type: array
+      description: >-
+        A 2D JSON array where the first element is an array of variable names
+        (headers) and each subsequent element is an array of corresponding
+        data values. The last elements in each row are typically geography codes.
+      items:
+        type: array
+        description: A single data row (header row or data row)
+        items:
+          type: string
+          nullable: true
+      example:
+        - ["NAME", "B01003_001E", "state"]
+        - ["Alabama", "5024279", "01"]
+        - ["Alaska", "733391", "02"]
+        - ["Arizona", "7151502", "04"]
+
+    GeocodeCoordinates:
+      type: object
+      properties:
+        x:
+          type: number
+          format: double
+          description: Longitude
+        y:
+          type: number
+          format: double
+          description: Latitude
+
+    GeocodeAddressMatch:
+      type: object
+      properties:
+        tigerLineId:
+          type: string
+          description: TIGER/Line ID of the matched road segment
+        side:
+          type: string
+          description: Side of the road (L or R)
+        matchedAddress:
+          type: string
+          description: Standardized matched address string
+        coordinates:
+          $ref: '#/components/schemas/GeocodeCoordinates'
+        addressComponents:
+          type: object
+          description: Parsed address components
+
+    GeocodeResponse:
+      type: object
+      properties:
+        result:
+          type: object
+          properties:
+            input:
+              type: object
+              description: The input address that was geocoded
+            addressMatches:
+              type: array
+              description: Array of matched addresses
+              items:
+                $ref: '#/components/schemas/GeocodeAddressMatch'
+
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters, missing required fields, or variable not found
+      content:
+        text/html:
+          schema:
+            type: string
+
+externalDocs:
+  description: Census Data API User Guide
+  url: https://www.census.gov/data/developers/guidance/api-user-guide.html

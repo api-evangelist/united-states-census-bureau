@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.census.gov/data/2023/acs/acs5",
+    "query": {
+      "get": "NAME,B01003_001E,B19013_001E,B25077_001E",
+      "for": "county:*",
+      "in": "state:06"
+    }
+  },
+  "description": "Get total population, median household income, and median home value for all California counties using ACS 5-Year 2019-2023 estimates",
+  "response": {
+    "status": 200,
+    "body": [
+      ["NAME", "B01003_001E", "B19013_001E", "B25077_001E", "state", "county"],
+      ["Alameda County, California", "1682353", "105534", "912900", "06", "001"],
+      ["Alpine County, California", "1204", "59375", "407700", "06", "003"],
+      ["Amador County, California", "40354", "62321", "378500", "06", "005"],
+      ["Butte County, California", "211921", "49942", "301300", "06", "007"],
+      ["Calaveras County, California", "46285", "60673", "361300", "06", "009"]
+    ]
+  }
+}

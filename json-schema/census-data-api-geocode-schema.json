@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geocoding.geo.census.gov/schemas/geocode-response",
+  "title": "Census Geocoder Response",
+  "description": "The response format from Census Geocoding Services, containing matched addresses with coordinates and optional census geography identifiers.",
+  "type": "object",
+  "required": ["result"],
+  "properties": {
+    "result": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "object",
+          "description": "The input address and parameters used for geocoding"
+        },
+        "addressMatches": {
+          "type": "array",
+          "description": "Array of matched addresses (may be empty if no match found)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tigerLineId": {
+                "type": "string",
+                "description": "TIGER/Line Shapefile identifier for the matched road segment"
+              },
+              "side": {
+                "type": "string",
+                "description": "Side of the road segment (L for left, R for right)",
+                "enum": ["L", "R"]
+              },
+              "matchedAddress": {
+                "type": "string",
+                "description": "Standardized and formatted matched address string"
+              },
+              "coordinates": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "description": "Longitude in decimal degrees (WGS84)"
+                  },
+                  "y": {
+                    "type": "number",
+                    "description": "Latitude in decimal degrees (WGS84)"
+                  }
+                },
+                "required": ["x", "y"]
+              },
+              "addressComponents": {
+                "type": "object",
+                "description": "Parsed components of the matched address",
+                "properties": {
+                  "fromAddress": { "type": "string" },
+                  "toAddress": { "type": "string" },
+                  "preQualifier": { "type": "string" },
+                  "preDirection": { "type": "string" },
+                  "preType": { "type": "string" },
+                  "streetName": { "type": "string" },
+                  "suffixType": { "type": "string" },
+                  "suffixDirection": { "type": "string" },
+                  "suffixQualifier": { "type": "string" },
+                  "city": { "type": "string" },
+                  "state": { "type": "string" },
+                  "zip": { "type": "string" }
+                }
+              },
+              "geographies": {
+                "type": "object",
+                "description": "Census geographic layers at the matched location (only present when vintage is specified)"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

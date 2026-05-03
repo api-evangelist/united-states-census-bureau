@@ -1,0 +1,73 @@
+extends:
+  - spectral:oas
+
+rules:
+  census-year-parameter-documented:
+    description: Year path parameters should document available year ranges
+    message: "Year path parameters should document the range of available data years"
+    severity: warn
+    given: $.paths..parameters[?(@.name == "year")].description
+    then:
+      function: truthy
+
+  census-get-parameter-required:
+    description: The get query parameter is the primary Census API parameter and should be marked required
+    message: "The 'get' query parameter should be required for Census Data API endpoints"
+    severity: error
+    given: $.paths..parameters[?(@.name == "get")]
+    then:
+      field: required
+      function: truthy
+
+  census-for-geography-documented:
+    description: The for geography parameter should document FIPS code syntax
+    message: "The 'for' parameter should document geography FIPS filter syntax"
+    severity: warn
+    given: $.paths..parameters[?(@.name == "for")].description
+    then:
+      function: truthy
+
+  census-key-parameter-documented:
+    description: API key parameters should explain usage limits
+    message: "The 'key' parameter should describe the usage limits benefit (500+ requests/day)"
+    severity: info
+    given: $.paths..parameters[?(@.name == "key")].description
+    then:
+      function: pattern
+      functionOptions:
+        match: "(requests|limit|key)"
+
+  census-operation-ids-present:
+    description: All operations must have operationIds
+    message: "Operation must have an operationId"
+    severity: error
+    given: $.paths[*][*]
+    then:
+      field: operationId
+      function: truthy
+
+  census-tags-present:
+    description: All operations should have tags for dataset grouping
+    message: "Operation should be tagged with its dataset category"
+    severity: warn
+    given: $.paths[*][*]
+    then:
+      field: tags
+      function: truthy
+
+  census-response-schema-defined:
+    description: All 200 responses should define response schema
+    message: "200 response should define the DataAPIResponse or GeocodeResponse schema"
+    severity: warn
+    given: $.paths..responses.200.content.application/json
+    then:
+      field: schema
+      function: truthy
+
+  census-2d-array-response-described:
+    description: The 2D array response format should be documented
+    message: "Census 2D array response format should be described in the operation description"
+    severity: info
+    given: $.paths..[?(@.tags && @.tags.includes('American Community Survey'))].description
+    then:
+      function: truthy

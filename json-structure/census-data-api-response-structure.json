@@ -1,0 +1,26 @@
+{
+  "title": "Census Data API Response Structure",
+  "description": "Structure documentation for the Census Data API 2D array response format",
+  "type": "array",
+  "rows": [
+    {
+      "index": 0,
+      "name": "Header Row",
+      "type": "array<string>",
+      "description": "Column names: variable names as requested in the ?get= parameter, followed by geography identifier columns (state, county, tract, etc.)"
+    },
+    {
+      "index": "1+",
+      "name": "Data Row(s)",
+      "type": "array<string|null>",
+      "description": "Data values corresponding to the header row. Values are always strings. Geography FIPS codes appear as trailing columns."
+    }
+  ],
+  "notes": [
+    "All values are returned as strings, including numeric statistics",
+    "Missing or suppressed values are returned as null",
+    "Geographic FIPS codes are always appended at the end of each row",
+    "Estimate variables end in E (e.g., B01003_001E), margin of error variables end in M",
+    "Maximum 50 variables per request"
+  ]
+}

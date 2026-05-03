@@ -1,0 +1,174 @@
+name: United States Census Bureau Vocabulary
+description: >-
+  Domain vocabulary for the U.S. Census Bureau covering census data collection,
+  demographic statistics, geographic hierarchy, survey methodology, and the
+  Census Data API data structures.
+tags:
+  - Demographics
+  - Federal Government
+  - Statistics
+  - Open Data
+  - Economics
+created: '2026-05-03'
+modified: '2026-05-03'
+
+terms:
+
+  - term: American Community Survey
+    label: American Community Survey
+    abbreviation: ACS
+    definition: >-
+      An ongoing survey by the U.S. Census Bureau that collects detailed social,
+      economic, housing, and demographic information. The ACS produces 1-Year
+      estimates for geographies with 65,000+ population and 5-Year estimates for
+      all geographies down to block group. The ACS replaced the decennial census
+      long form.
+    tags:
+      - Survey
+      - Demographics
+
+  - term: Block Group
+    label: Block Group
+    definition: >-
+      A cluster of census blocks within a census tract. Block groups are the
+      smallest geographic unit for which the Census Bureau tabulates and publishes
+      sample data. They typically contain 600 to 3,000 people.
+    tags:
+      - Geography
+      - Classification
+
+  - term: Census Tract
+    label: Census Tract
+    definition: >-
+      Small, relatively permanent statistical subdivisions of a county designed
+      to be homogeneous with respect to population characteristics, economic
+      status, and living conditions. Census tracts average about 4,000 inhabitants.
+    tags:
+      - Geography
+      - Classification
+
+  - term: County Business Patterns
+    label: County Business Patterns
+    abbreviation: CBP
+    definition: >-
+      An annual series providing sub-national economic data by industry. CBP
+      includes the number of establishments, employment, first quarter payroll,
+      and annual payroll for most U.S. industries at the national, state, county,
+      and ZIP code levels.
+    tags:
+      - Economics
+      - Business Data
+
+  - term: Decennial Census
+    label: Decennial Census
+    definition: >-
+      The complete count of the U.S. population conducted every 10 years as
+      required by the Constitution. Provides official counts used for
+      congressional apportionment, redistricting, and federal funding allocation.
+    tags:
+      - Survey
+      - Demographics
+
+  - term: Estimate Variable
+    label: Estimate Variable
+    definition: >-
+      A variable in the Census Data API representing a statistical estimate,
+      identified by an "E" suffix (e.g., B01003_001E for total population estimate,
+      B19013_001E for median household income estimate). Contrast with margin of
+      error variables which use an "M" suffix.
+    tags:
+      - Data Structure
+      - API
+
+  - term: FIPS Code
+    label: Federal Information Processing Standard Code
+    abbreviation: FIPS
+    definition: >-
+      A standardized numerical code used to identify geographic entities in the
+      United States. Two-digit codes for states, five-digit codes for counties
+      (state + county), and longer codes for sub-county geographies. Used as
+      geography identifiers in Census API responses.
+    tags:
+      - Geography
+      - Identifiers
+
+  - term: Geography Level
+    label: Geography Level
+    definition: >-
+      The level of geographic aggregation in a Census API query, specified in
+      the &for= parameter. Available levels include national, region, division,
+      state, county, county subdivision, place, ZIP code tabulation area, tract,
+      and block group.
+    tags:
+      - Geography
+      - API
+
+  - term: Margin Of Error
+    label: Margin of Error
+    abbreviation: MOE
+    definition: >-
+      An expression of the precision of an ACS estimate. Represents a 90%
+      confidence interval around the estimate. Margin of error variables use
+      the "M" suffix (e.g., B01003_001M). Wider margins indicate less reliable
+      estimates, particularly for small geographies or small population groups.
+    tags:
+      - Statistics
+      - Data Quality
+
+  - term: NAICS
+    label: North American Industry Classification System
+    abbreviation: NAICS
+    definition: >-
+      The standard used by federal statistical agencies to classify business
+      establishments by industry. Used in County Business Patterns and Economic
+      Census data. Codes range from 2-digit (major sectors) to 6-digit
+      (specific industries).
+    tags:
+      - Economics
+      - Classification
+
+  - term: Population Estimates Program
+    label: Population Estimates Program
+    abbreviation: PEP
+    definition: >-
+      A Census Bureau program that produces annual estimates of the population
+      for the nation, states, counties, cities, and towns. Uses births, deaths,
+      and migration as inputs to estimate population change between decennial
+      censuses.
+    tags:
+      - Demographics
+      - Survey
+
+  - term: TIGERweb
+    label: TIGERweb GeoServices
+    definition: >-
+      A set of web-based geographic information services providing access to
+      Census Bureau geographic data and boundaries. TIGERweb serves feature
+      classes from the Topologically Integrated Geographic Encoding and
+      Referencing (TIGER) database through standard ArcGIS REST API interfaces.
+    tags:
+      - Geography
+      - API
+
+  - term: Variable
+    label: Census API Variable
+    definition: >-
+      A named data element in a Census dataset that can be requested in an API
+      query. Variables are specified in the ?get= parameter. Each dataset has
+      hundreds to thousands of variables. Variable names may be human-readable
+      (e.g., NAME, POP, STNAME) or alphanumeric codes (e.g., B01003_001E
+      for total population in ACS).
+    tags:
+      - API
+      - Data Structure
+
+  - term: Vintage
+    label: Data Vintage
+    definition: >-
+      The reference period for a dataset. In the Census API URL, the year path
+      parameter specifies the vintage. For ACS 5-Year data, the vintage refers
+      to the end year of the 5-year period. For Population Estimates, it refers
+      to the year through which estimates have been calculated.
+    tags:
+      - Data Structure
+      - Time

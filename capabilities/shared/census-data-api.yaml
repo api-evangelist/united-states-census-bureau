@@ -1,0 +1,299 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Census Data API"
+  description: >-
+    The U.S. Census Bureau Data API providing programmatic access to statistical
+    data across demographic, economic, housing, and social datasets including
+    the American Community Survey, Decennial Census, Population Estimates,
+    County Business Patterns, and International Trade data.
+  tags:
+    - Demographics
+    - Federal Government
+    - Open Data
+    - Statistics
+    - Economics
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+capability:
+  consumes:
+    - type: http
+      namespace: census
+      baseUri: https://api.census.gov/data
+      description: "U.S. Census Bureau Data API"
+      resources:
+        - name: acs5
+          path: /{year}/acs/acs5
+          description: "American Community Survey 5-Year Estimates"
+          operations:
+            - name: get-acs5
+              method: GET
+              description: "Returns ACS 5-Year demographic, economic, social, and housing data"
+              inputParameters:
+                - name: year
+                  in: path
+                  type: integer
+                  required: true
+                  description: "ACS 5-Year end year (2009-2024)"
+                - name: get
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated variable names to retrieve (max 50)"
+                - name: for
+                  in: query
+                  type: string
+                  required: false
+                  description: "Geography filter (e.g., state:06, county:*&in=state:06)"
+                - name: in
+                  in: query
+                  type: string
+                  required: false
+                  description: "Parent geography constraint for sub-state geographies"
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "Census API key for higher usage limits"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: acs1
+          path: /{year}/acs/acs1
+          description: "American Community Survey 1-Year Estimates"
+          operations:
+            - name: get-acs1
+              method: GET
+              description: "Returns ACS 1-Year data for geographies with 65,000+ population"
+              inputParameters:
+                - name: year
+                  in: path
+                  type: integer
+                  required: true
+                  description: "ACS 1-Year year (2005-2024)"
+                - name: get
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated variable names to retrieve"
+                - name: for
+                  in: query
+                  type: string
+                  required: false
+                  description: "Geography filter"
+                - name: in
+                  in: query
+                  type: string
+                  required: false
+                  description: "Parent geography constraint"
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "Census API key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: decennial
+          path: /{year}/dec/pl
+          description: "Decennial Census Redistricting Data"
+          operations:
+            - name: get-decennial
+              method: GET
+              description: "Returns Decennial Census population counts by race/ethnicity"
+              inputParameters:
+                - name: year
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Census year (2020 or 2010)"
+                - name: get
+                  in: query
+                  type: string
+                  required: true
+                  description: "Variable names to retrieve"
+                - name: for
+                  in: query
+                  type: string
+                  required: false
+                  description: "Geography filter"
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "Census API key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: population-estimates
+          path: /{year}/pep/population
+          description: "Annual Population Estimates"
+          operations:
+            - name: get-population-estimates
+              method: GET
+              description: "Returns annual population estimates for states and counties"
+              inputParameters:
+                - name: year
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Estimates vintage year"
+                - name: get
+                  in: query
+                  type: string
+                  required: true
+                  description: "Variable names (e.g., NAME,POP,DATE_DESC)"
+                - name: for
+                  in: query
+                  type: string
+                  required: false
+                  description: "Geography filter"
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "Census API key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: cbp
+          path: /{year}/cbp
+          description: "County Business Patterns"
+          operations:
+            - name: get-county-business-patterns
+              method: GET
+              description: "Returns business establishment, employment, and payroll data"
+              inputParameters:
+                - name: year
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Data year (1986-2022)"
+                - name: get
+                  in: query
+                  type: string
+                  required: true
+                  description: "Variable names (e.g., NAME,NAICS2017,ESTAB,EMP,PAYANN)"
+                - name: for
+                  in: query
+                  type: string
+                  required: false
+                  description: "Geography filter"
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "Census API key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: census-data-rest
+      resources:
+        - path: /v1/acs/5year/{year}
+          name: acs5-data
+          operations:
+            - method: GET
+              name: get-acs5-data
+              description: "Get ACS 5-Year estimates"
+              call: "census.get-acs5"
+              with:
+                year: "rest.year"
+                get: "rest.get"
+                for: "rest.for"
+                in: "rest.in"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/population-estimates/{year}
+          name: population-estimates
+          operations:
+            - method: GET
+              name: get-population-estimates
+              description: "Get annual population estimates"
+              call: "census.get-population-estimates"
+              with:
+                year: "rest.year"
+                get: "rest.get"
+                for: "rest.for"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/business-patterns/{year}
+          name: business-patterns
+          operations:
+            - method: GET
+              name: get-business-patterns
+              description: "Get county business patterns data"
+              call: "census.get-county-business-patterns"
+              with:
+                year: "rest.year"
+                get: "rest.get"
+                for: "rest.for"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: census-data-mcp
+      transport: http
+      tools:
+        - name: query-acs-5year
+          description: "Query ACS 5-Year demographic estimates (population, income, housing, education) for any US geography"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "census.get-acs5"
+          with:
+            year: "tools.year"
+            get: "tools.get"
+            for: "tools.for"
+            in: "tools.in"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: query-population-estimates
+          description: "Get annual population estimates for states and counties"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "census.get-population-estimates"
+          with:
+            year: "tools.year"
+            get: "tools.get"
+            for: "tools.for"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: query-business-patterns
+          description: "Get business establishment counts, employment, and payroll by industry and geography"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "census.get-county-business-patterns"
+          with:
+            year: "tools.year"
+            get: "tools.get"
+            for: "tools.for"
+          outputParameters:
+            - type: array
+              mapping: "$."

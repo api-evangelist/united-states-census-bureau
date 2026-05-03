@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "dct": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "sdmx": "http://purl.org/linked-data/sdmx/2009/dimension#",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "census": "https://api.census.gov/vocab#",
+    "tiger": "https://tigerweb.geo.census.gov/vocab#",
+
+    "CensusDataset": {
+      "@id": "schema:Dataset",
+      "@type": "@id"
+    },
+    "StatisticalVariable": {
+      "@id": "census:StatisticalVariable",
+      "@type": "@id"
+    },
+    "CensusGeography": {
+      "@id": "census:CensusGeography",
+      "@type": "@id"
+    },
+    "CensusTract": {
+      "@id": "census:Tract",
+      "@type": "@id"
+    },
+    "BlockGroup": {
+      "@id": "census:BlockGroup",
+      "@type": "@id"
+    },
+    "FIPS": {
+      "@id": "census:FIPSCode"
+    },
+    "populationEstimate": {
+      "@id": "census:populationEstimate",
+      "@type": "xsd:integer"
+    },
+    "medianHouseholdIncome": {
+      "@id": "census:medianHouseholdIncome",
+      "@type": "xsd:decimal"
+    },
+    "medianHomeValue": {
+      "@id": "census:medianHomeValue",
+      "@type": "xsd:decimal"
+    },
+    "vintage": {
+      "@id": "census:vintage"
+    },
+    "surveyYear": {
+      "@id": "census:surveyYear",
+      "@type": "xsd:integer"
+    },
+    "geoLevel": {
+      "@id": "census:geographyLevel"
+    },
+    "state": {
+      "@id": "schema:addressRegion"
+    },
+    "county": {
+      "@id": "schema:addressLocality"
+    },
+    "tract": {
+      "@id": "census:censusTract"
+    },
+    "blockGroup": {
+      "@id": "census:blockGroup"
+    },
+    "latitude": {
+      "@id": "schema:latitude",
+      "@type": "xsd:double"
+    },
+    "longitude": {
+      "@id": "schema:longitude",
+      "@type": "xsd:double"
+    },
+    "matchedAddress": {
+      "@id": "schema:address"
+    },
+    "coordinates": {
+      "@id": "geo:hasGeometry",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "identifier": "schema:identifier",
+    "publisher": {
+      "@id": "schema:publisher",
+      "@type": "@id"
+    }
+  }
+}

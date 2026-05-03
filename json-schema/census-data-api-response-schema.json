@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.census.gov/schemas/data-response",
+  "title": "Census Data API Response",
+  "description": "The standard 2D array response format returned by all Census Data API statistical endpoints. The first row contains variable name headers; subsequent rows contain corresponding data values including geography codes.",
+  "type": "array",
+  "items": {
+    "type": "array",
+    "description": "A single row in the response. The first row contains column headers (variable names); data rows contain string values.",
+    "items": {
+      "type": ["string", "null"],
+      "description": "A single cell value (variable name in header row, or data value in data rows)"
+    }
+  },
+  "examples": [
+    [
+      ["NAME", "B01003_001E", "state"],
+      ["Alabama", "5024279", "01"],
+      ["Alaska", "733391", "02"],
+      ["Arizona", "7151502", "04"]
+    ]
+  ]
+}

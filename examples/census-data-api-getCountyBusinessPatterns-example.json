@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.census.gov/data/2022/cbp",
+    "query": {
+      "get": "NAME,NAICS2017,ESTAB,EMP,PAYANN",
+      "for": "state:*",
+      "NAICS2017": "5415"
+    }
+  },
+  "description": "Get number of computer systems design establishments, employment, and annual payroll by state for NAICS 5415 (Computer Systems Design)",
+  "response": {
+    "status": 200,
+    "body": [
+      ["NAME", "NAICS2017", "ESTAB", "EMP", "PAYANN", "state"],
+      ["United States", "5415", "108432", "2143851", "241512109", "00"],
+      ["Alabama", "5415", "952", "13879", "910142", "01"],
+      ["Alaska", "5415", "196", "1842", "137612", "02"],
+      ["Arizona", "5415", "4125", "76498", "7089234", "04"],
+      ["Arkansas", "5415", "522", "8134", "509871", "05"],
+      ["California", "5415", "28741", "473921", "65234890", "06"]
+    ]
+  }
+}

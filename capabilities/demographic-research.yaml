@@ -1,0 +1,190 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Census Bureau Demographic Research"
+  description: >-
+    Unified workflow capability for accessing U.S. Census Bureau statistical data
+    for demographic research, economic analysis, geographic enrichment, and
+    population studies. Combines the Census Data API, Geocoding Services, and
+    TIGERweb geographic data into workflows for researchers, analysts, and
+    application developers.
+  tags:
+    - Demographics
+    - Federal Government
+    - Open Data
+    - Statistics
+    - Population
+    - Economics
+    - Geography
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+capability:
+  consumes:
+    - import: census
+      location: ./shared/census-data-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: census-research-api
+      description: "Unified REST API for Census Bureau demographic and economic data access."
+      resources:
+        - path: /v1/demographics/{year}/acs5
+          name: acs5-demographics
+          description: "ACS 5-Year demographic, economic, social, and housing estimates"
+          operations:
+            - method: GET
+              name: get-acs5-demographics
+              description: "Get ACS 5-Year estimates for any US geography down to block group"
+              call: "census.get-acs5"
+              with:
+                year: "rest.year"
+                get: "rest.get"
+                for: "rest.for"
+                in: "rest.in"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/demographics/{year}/acs1
+          name: acs1-demographics
+          description: "ACS 1-Year demographic estimates for large geographies"
+          operations:
+            - method: GET
+              name: get-acs1-demographics
+              description: "Get ACS 1-Year estimates for geographies with 65,000+ population"
+              call: "census.get-acs1"
+              with:
+                year: "rest.year"
+                get: "rest.get"
+                for: "rest.for"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/population/{year}/estimates
+          name: population-estimates
+          description: "Annual population estimates by geography"
+          operations:
+            - method: GET
+              name: get-population-estimates
+              description: "Get annual population estimates using births, deaths, and migration data"
+              call: "census.get-population-estimates"
+              with:
+                year: "rest.year"
+                get: "rest.get"
+                for: "rest.for"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/census/{year}/decennial
+          name: decennial-counts
+          description: "Decennial Census population counts"
+          operations:
+            - method: GET
+              name: get-decennial-data
+              description: "Get official Decennial Census population counts by geography and race"
+              call: "census.get-decennial"
+              with:
+                year: "rest.year"
+                get: "rest.get"
+                for: "rest.for"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/economy/{year}/business-patterns
+          name: business-patterns
+          description: "County Business Patterns economic data"
+          operations:
+            - method: GET
+              name: get-business-patterns
+              description: "Get business establishment counts, employment, and payroll by industry"
+              call: "census.get-county-business-patterns"
+              with:
+                year: "rest.year"
+                get: "rest.get"
+                for: "rest.for"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: census-research-mcp
+      transport: http
+      description: "MCP server for AI-assisted demographic research and census data analysis."
+      tools:
+        - name: query-demographic-data
+          description: "Query ACS 5-Year demographic data (population, income, education, housing) for any US geography from national down to block group level"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "census.get-acs5"
+          with:
+            year: "tools.year"
+            get: "tools.get"
+            for: "tools.for"
+            in: "tools.in"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: query-acs-1year
+          description: "Query ACS 1-Year demographic data for large geographies (65,000+ population) with more current estimates"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "census.get-acs1"
+          with:
+            year: "tools.year"
+            get: "tools.get"
+            for: "tools.for"
+            in: "tools.in"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: query-population-estimates
+          description: "Get annual population estimates for states and counties, including historical estimates back to the last decennial census"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "census.get-population-estimates"
+          with:
+            year: "tools.year"
+            get: "tools.get"
+            for: "tools.for"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: query-decennial-census
+          description: "Get official Decennial Census population counts from 2020 or 2010, with data by race/ethnicity at all geographic levels"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "census.get-decennial"
+          with:
+            year: "tools.year"
+            get: "tools.get"
+            for: "tools.for"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: query-business-statistics
+          description: "Get economic data on business establishments, employment counts, and payroll by industry (NAICS) and geography from County Business Patterns"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "census.get-county-business-patterns"
+          with:
+            year: "tools.year"
+            get: "tools.get"
+            for: "tools.for"
+          outputParameters:
+            - type: array
+              mapping: "$."

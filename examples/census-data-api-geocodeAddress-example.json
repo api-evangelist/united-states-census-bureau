@@ -1,0 +1,87 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress",
+    "query": {
+      "address": "4600 Silver Hill Rd, Washington DC 20233",
+      "benchmark": "Public_AR_Current",
+      "vintage": "Current_Current",
+      "format": "json"
+    }
+  },
+  "description": "Geocode the Census Bureau headquarters address to get coordinates and census geography identifiers",
+  "response": {
+    "status": 200,
+    "body": {
+      "result": {
+        "input": {
+          "address": {
+            "address": "4600 Silver Hill Rd, Washington DC 20233"
+          },
+          "benchmark": {
+            "isDefault": false,
+            "benchmarkDescription": "Public Address Ranges - Current Benchmark",
+            "id": "4",
+            "benchmarkName": "Public_AR_Current"
+          },
+          "vintage": {
+            "isDefault": false,
+            "vintageName": "Current_Current",
+            "vintageDescription": "Current Vintage - Current Benchmark",
+            "id": "4"
+          }
+        },
+        "addressMatches": [
+          {
+            "tigerLineId": "76355984",
+            "side": "L",
+            "matchedAddress": "4600 SILVER HILL RD, WASHINGTON, DC, 20233",
+            "coordinates": {
+              "x": -76.92748,
+              "y": 38.84601
+            },
+            "addressComponents": {
+              "zip": "20233",
+              "streetName": "SILVER HILL",
+              "preType": "",
+              "city": "WASHINGTON",
+              "preDirection": "",
+              "suffixDirection": "",
+              "fromAddress": "4600",
+              "state": "DC",
+              "suffixType": "RD",
+              "toAddress": "4600",
+              "suffixQualifier": "",
+              "preQualifier": ""
+            },
+            "geographies": {
+              "States": [
+                {
+                  "STATENS": "01702382",
+                  "GEOID": "11",
+                  "CENTLAT": "+38.9071900",
+                  "AREAWATER": "18672752",
+                  "NAME": "District of Columbia",
+                  "FUNCSTAT": "A",
+                  "STUSAB": "DC",
+                  "CENTLON": "-077.0366900",
+                  "STATE": "11"
+                }
+              ],
+              "Census Tracts": [
+                {
+                  "TRACT": "007503",
+                  "GEOID": "11001007503",
+                  "BLKGRP": "1",
+                  "NAME": "Census Tract 75.03",
+                  "COUNTY": "001",
+                  "STATE": "11"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
