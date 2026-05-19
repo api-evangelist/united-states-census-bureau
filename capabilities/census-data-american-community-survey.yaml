@@ -1,0 +1,172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Census Data API — American Community Survey
+  description: 'Census Data API — American Community Survey. 2 operations. Lead operation: Get ACS 1-Year Data. Self-contained
+    Naftiko capability covering one United States Census Bureau business surface.'
+  tags:
+  - United States Census Bureau
+  - American Community Survey
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITED_STATES_CENSUS_BUREAU_API_KEY: UNITED_STATES_CENSUS_BUREAU_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: census-data-american-community-survey
+    baseUri: https://api.census.gov/data
+    description: Census Data API — American Community Survey business capability. Self-contained, no shared references.
+    resources:
+    - name: year-acs-acs1
+      path: /{year}/acs/acs1
+      operations:
+      - name: getacs1year
+        method: GET
+        description: Get ACS 1-Year Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: year
+          in: path
+          type: integer
+          description: Data year (2005-2024)
+          required: true
+        - name: get
+          in: query
+          type: string
+          description: Comma-separated list of variable names to retrieve (e.g., NAME,B01003_001E for name and total population).
+            Maximum 50 variables per query.
+          required: true
+        - name: for
+          in: query
+          type: string
+          description: Geographic level and FIPS code filter (e.g., state:01 for Alabama, county:*&in=state:06 for all CA
+            counties)
+        - name: in
+          in: query
+          type: string
+          description: Parent geography constraint for sub-state geographies (e.g., state:06 to restrict to California)
+        - name: key
+          in: query
+          type: string
+          description: Census API key for higher usage limits (500+ requests/day)
+    - name: year-acs-acs5
+      path: /{year}/acs/acs5
+      operations:
+      - name: getacs5year
+        method: GET
+        description: Get ACS 5-Year Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: year
+          in: path
+          type: integer
+          description: End year of the 5-year period (2009-2024)
+          required: true
+        - name: get
+          in: query
+          type: string
+          description: Comma-separated variable names (e.g., NAME,B01003_001E,B19013_001E for name, total population, and
+            median household income)
+          required: true
+        - name: for
+          in: query
+          type: string
+          description: Geographic level and FIPS code filter
+        - name: in
+          in: query
+          type: string
+          description: Parent geography constraint
+        - name: key
+          in: query
+          type: string
+          description: Census API key
+  exposes:
+  - type: rest
+    namespace: census-data-american-community-survey-rest
+    port: 8080
+    description: REST adapter for Census Data API — American Community Survey. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/{year}/acs/acs1
+      name: year-acs-acs1
+      description: REST surface for year-acs-acs1.
+      operations:
+      - method: GET
+        name: getacs1year
+        description: Get ACS 1-Year Data
+        call: census-data-american-community-survey.getacs1year
+        with:
+          year: rest.year
+          get: rest.get
+          for: rest.for
+          in: rest.in
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{year}/acs/acs5
+      name: year-acs-acs5
+      description: REST surface for year-acs-acs5.
+      operations:
+      - method: GET
+        name: getacs5year
+        description: Get ACS 5-Year Data
+        call: census-data-american-community-survey.getacs5year
+        with:
+          year: rest.year
+          get: rest.get
+          for: rest.for
+          in: rest.in
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: census-data-american-community-survey-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Census Data API — American Community Survey. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-acs-1-year-data
+      description: Get ACS 1-Year Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: census-data-american-community-survey.getacs1year
+      with:
+        year: tools.year
+        get: tools.get
+        for: tools.for
+        in: tools.in
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-acs-5-year-data
+      description: Get ACS 5-Year Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: census-data-american-community-survey.getacs5year
+      with:
+        year: tools.year
+        get: tools.get
+        for: tools.for
+        in: tools.in
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.

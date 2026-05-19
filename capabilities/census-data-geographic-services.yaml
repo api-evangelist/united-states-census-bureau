@@ -1,0 +1,181 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Census Data API — Geographic Services
+  description: 'Census Data API — Geographic Services. 2 operations. Lead operation: Geocode Structured Address. Self-contained
+    Naftiko capability covering one United States Census Bureau business surface.'
+  tags:
+  - United States Census Bureau
+  - Geographic Services
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITED_STATES_CENSUS_BUREAU_API_KEY: UNITED_STATES_CENSUS_BUREAU_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: census-data-geographic-services
+    baseUri: https://api.census.gov/data
+    description: Census Data API — Geographic Services business capability. Self-contained, no shared references.
+    resources:
+    - name: geocoder-locations-address
+      path: /geocoder/locations/address
+      operations:
+      - name: geocodeaddress
+        method: GET
+        description: Geocode Structured Address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: street
+          in: query
+          type: string
+          description: Street address (e.g., "4600 Silver Hill Rd")
+          required: true
+        - name: city
+          in: query
+          type: string
+          description: City name
+        - name: state
+          in: query
+          type: string
+          description: Two-character state abbreviation or FIPS code
+        - name: zip
+          in: query
+          type: string
+          description: Five-digit ZIP code
+        - name: benchmark
+          in: query
+          type: string
+          description: Geocoding benchmark to use
+          required: true
+        - name: vintage
+          in: query
+          type: string
+          description: Geographic vintage for returned geography identifiers
+        - name: format
+          in: query
+          type: string
+          description: Response format
+    - name: geocoder-locations-onelineaddress
+      path: /geocoder/locations/onelineaddress
+      operations:
+      - name: geocodeonelineaddress
+        method: GET
+        description: Geocode One-Line Address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: address
+          in: query
+          type: string
+          description: Full address as a single string (e.g., "4600 Silver Hill Rd, Washington DC 20233")
+          required: true
+        - name: benchmark
+          in: query
+          type: string
+          description: The geocoding benchmark to use (e.g., Public_AR_Current, Public_AR_Census2020)
+          required: true
+        - name: vintage
+          in: query
+          type: string
+          description: Geographic vintage for returned geography identifiers (e.g., Current_Current, Census2020_Census2020)
+        - name: format
+          in: query
+          type: string
+          description: Response format
+        - name: layers
+          in: query
+          type: string
+          description: Geographic layers to include in the response
+  exposes:
+  - type: rest
+    namespace: census-data-geographic-services-rest
+    port: 8080
+    description: REST adapter for Census Data API — Geographic Services. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/geocoder/locations/address
+      name: geocoder-locations-address
+      description: REST surface for geocoder-locations-address.
+      operations:
+      - method: GET
+        name: geocodeaddress
+        description: Geocode Structured Address
+        call: census-data-geographic-services.geocodeaddress
+        with:
+          street: rest.street
+          city: rest.city
+          state: rest.state
+          zip: rest.zip
+          benchmark: rest.benchmark
+          vintage: rest.vintage
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/geocoder/locations/onelineaddress
+      name: geocoder-locations-onelineaddress
+      description: REST surface for geocoder-locations-onelineaddress.
+      operations:
+      - method: GET
+        name: geocodeonelineaddress
+        description: Geocode One-Line Address
+        call: census-data-geographic-services.geocodeonelineaddress
+        with:
+          address: rest.address
+          benchmark: rest.benchmark
+          vintage: rest.vintage
+          format: rest.format
+          layers: rest.layers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: census-data-geographic-services-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Census Data API — Geographic Services. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: geocode-structured-address
+      description: Geocode Structured Address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: census-data-geographic-services.geocodeaddress
+      with:
+        street: tools.street
+        city: tools.city
+        state: tools.state
+        zip: tools.zip
+        benchmark: tools.benchmark
+        vintage: tools.vintage
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: geocode-one-line-address
+      description: Geocode One-Line Address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: census-data-geographic-services.geocodeonelineaddress
+      with:
+        address: tools.address
+        benchmark: tools.benchmark
+        vintage: tools.vintage
+        format: tools.format
+        layers: tools.layers
+      outputParameters:
+      - type: object
+        mapping: $.

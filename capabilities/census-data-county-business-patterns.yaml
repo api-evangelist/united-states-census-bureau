@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Census Data API — County Business Patterns
+  description: 'Census Data API — County Business Patterns. 1 operations. Lead operation: Get County Business Patterns. Self-contained
+    Naftiko capability covering one United States Census Bureau business surface.'
+  tags:
+  - United States Census Bureau
+  - County Business Patterns
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITED_STATES_CENSUS_BUREAU_API_KEY: UNITED_STATES_CENSUS_BUREAU_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: census-data-county-business-patterns
+    baseUri: https://api.census.gov/data
+    description: Census Data API — County Business Patterns business capability. Self-contained, no shared references.
+    resources:
+    - name: year-cbp
+      path: /{year}/cbp
+      operations:
+      - name: getcountybusinesspatterns
+        method: GET
+        description: Get County Business Patterns
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: year
+          in: path
+          type: integer
+          description: Data year (1986-2022)
+          required: true
+        - name: get
+          in: query
+          type: string
+          description: Variable names (e.g., NAME,NAICS2017,ESTAB,EMP,PAYANN for business name, NAICS code, establishments,
+            employment, annual payroll)
+          required: true
+        - name: for
+          in: query
+          type: string
+          description: Geographic level and FIPS filter
+        - name: in
+          in: query
+          type: string
+          description: Parent geography constraint
+        - name: key
+          in: query
+          type: string
+          description: Census API key
+  exposes:
+  - type: rest
+    namespace: census-data-county-business-patterns-rest
+    port: 8080
+    description: REST adapter for Census Data API — County Business Patterns. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/{year}/cbp
+      name: year-cbp
+      description: REST surface for year-cbp.
+      operations:
+      - method: GET
+        name: getcountybusinesspatterns
+        description: Get County Business Patterns
+        call: census-data-county-business-patterns.getcountybusinesspatterns
+        with:
+          year: rest.year
+          get: rest.get
+          for: rest.for
+          in: rest.in
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: census-data-county-business-patterns-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Census Data API — County Business Patterns. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-county-business-patterns
+      description: Get County Business Patterns
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: census-data-county-business-patterns.getcountybusinesspatterns
+      with:
+        year: tools.year
+        get: tools.get
+        for: tools.for
+        in: tools.in
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
