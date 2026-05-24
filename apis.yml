@@ -110,6 +110,8 @@ common:
     url: https://apiforum.uscensusbureau.com/
   - type: Newsletter
     url: https://public.govdelivery.com/accounts/USCENSUS/subscriber/new?topic_id=USCENSUS_11933
+  - type: LLMsTxt
+    url: https://api.census.gov/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
