@@ -1,0 +1,496 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Census Data API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "American Community Survey",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get ACS 1-Year Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/acs/acs1",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Data year (2005-2024)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of variable names to retrieve (e.g., NAME,B01003_001E for name and total population). Maximum 50 variables per query."
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS code filter (e.g., state:01 for Alabama, county:*&in=state:06 for all CA counties)"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint for sub-state geographies (e.g., state:06 to restrict to California)"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key for higher usage limits (500+ requests/day)"
+              }
+            ]
+          },
+          "docs": "Returns American Community Survey 1-Year Estimates for geographies with populations of 65,000 or more. Covers social, economic, demographic, and housing characteristics. Data available from 2005 to present."
+        },
+        {
+          "info": {
+            "name": "Get ACS 5-Year Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/acs/acs5",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "End year of the 5-year period (2009-2024)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated variable names (e.g., NAME,B01003_001E,B19013_001E for name, total population, and median household income)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS code filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns American Community Survey 5-Year Estimates for all geographies down to block group level. More reliable for small populations and small geographies. Data available from 2009 to present."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Decennial Census",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Decennial Census Redistricting Data (P.L. 94-171)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/dec/pl",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Census year (2020 or 2010)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., P1_001N for total population)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns Decennial Census redistricting data including population counts by race/ethnicity and housing unit counts. Data available for 2020 and 2010."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Population Estimates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Population Estimates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/pep/population",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Vintage year for the estimates"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., NAME,POP,DATE_DESC for name, population, and date description)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns annual population estimates for states, counties, and metropolitan areas. Uses births, deaths, and migration to estimate population change between decennial censuses."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "County Business Patterns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get County Business Patterns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/cbp",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Data year (1986-2022)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., NAME,NAICS2017,ESTAB,EMP,PAYANN for business name, NAICS code, establishments, employment, annual payroll)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns annual statistics on the number of establishments, employment, first quarter payroll, and annual payroll for most U.S. industries at the national, state, county, and ZIP code level."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Economic Census",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Economic Census Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/ecnbasic",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Economic Census year (2002, 2007, 2012, 2017, 2022)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names to retrieve"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns economic census data covering all major economic sectors every 5 years. Provides number of establishments, employment, payroll, and sales/receipts by industry (NAICS) and geography."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "International",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get International Trade Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/intltrade/imp_exp",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Data year (2010-present)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., CTY_NAME,AIR_VAL_MO for country and airborne value)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic filter"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns monthly and annual statistics on U.S. imports and exports by commodity, country, and port. Data available from 2010 to present."
+        },
+        {
+          "info": {
+            "name": "Get International Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/idb/5year",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Data year"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., NAME,POP for country name and population)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic filter (e.g., country:01 for Afghanistan)"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns demographic data for countries and areas with populations of 5,000 or more. Includes historical and projected data through 2100 with population by age and sex, births, deaths, migration, and more."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Geographic Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Geocode One-Line Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/geocoder/locations/onelineaddress",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Full address as a single string (e.g., \"4600 Silver Hill Rd, Washington DC 20233\")"
+              },
+              {
+                "name": "benchmark",
+                "value": "",
+                "type": "query",
+                "description": "The geocoding benchmark to use (e.g., Public_AR_Current, Public_AR_Census2020)"
+              },
+              {
+                "name": "vintage",
+                "value": "",
+                "type": "query",
+                "description": "Geographic vintage for returned geography identifiers (e.g., Current_Current, Census2020_Census2020)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "layers",
+                "value": "",
+                "type": "query",
+                "description": "Geographic layers to include in the response"
+              }
+            ]
+          },
+          "docs": "Converts a one-line address string to geographic coordinates and census geography identifiers (state, county, tract, block FIPS codes)."
+        },
+        {
+          "info": {
+            "name": "Geocode Structured Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/geocoder/locations/address",
+            "params": [
+              {
+                "name": "street",
+                "value": "",
+                "type": "query",
+                "description": "Street address (e.g., \"4600 Silver Hill Rd\")"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City name"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Two-character state abbreviation or FIPS code"
+              },
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "Five-digit ZIP code"
+              },
+              {
+                "name": "benchmark",
+                "value": "",
+                "type": "query",
+                "description": "Geocoding benchmark to use"
+              },
+              {
+                "name": "vintage",
+                "value": "",
+                "type": "query",
+                "description": "Geographic vintage for returned geography identifiers"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Converts a structured address (street, city, state, ZIP) to geographic coordinates and census geography identifiers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

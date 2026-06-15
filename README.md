@@ -1,74 +1,104 @@
-# United States Census Bureau
+# United States Census Bureau (united-states-census-bureau)
 
-The U.S. Census Bureau is the nation's leading provider of quality data about its people and economy. The Census Bureau provides programmatic access to its datasets through the Census Data API, covering demographic, economic, housing, and social statistics. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and International Trade data, accessible at geographic levels from national down to census tract and block group.
+The U.S. Census Bureau is the nation's leading provider of quality data about its people and economy. The Census Bureau has been rolling out datasets via APIs, providing programmatic access to demographic, economic, housing, and social statistics. The Census Data API supports queries across datasets including the American Community Survey, Decennial Census, Population Estimates, County Business Patterns, Economic Census, and International Trade, with data available at national, state, county, tract, and block group geographic levels.
 
-**Website:** [https://www.census.gov/](https://www.census.gov/)
-**Developer Portal:** [https://www.census.gov/data/developers.html](https://www.census.gov/data/developers.html)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/united-states-census-bureau/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/united-states-census-bureau/refs/heads/main/apis.yml)
+
+## Tags
+
+- Demographics
+- Federal Government
+- Open Data
+- Statistics
+- Economics
+- Population
+
+## Timestamps
+
+- **Created:** 2024-01-01
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Census Data API
 
+The Census Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. Users can query demographic, economic, housing, and social data by geographic level and filter using hundreds of statistical variables. Datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, Economic Census, International Trade, and more.
+
+- **Human URL:** [https://www.census.gov/data/developers.html](https://www.census.gov/data/developers.html)
 - **Base URL:** `https://api.census.gov/data`
-- **Documentation:** [census.gov/data/developers](https://www.census.gov/data/developers.html)
-- **API Key Signup:** [api.census.gov/data/key_signup.html](https://api.census.gov/data/key_signup.html)
-- **Discovery Tool:** [New Discovery Tool](https://www.census.gov/data/developers/updates/new-discovery-tool.html)
+
+#### Tags
+
+- Demographics
+- Statistics
+- Open Data
+- REST API
+
+#### Properties
+
+- [Documentation](https://www.census.gov/data/developers.html)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/united-states-census-bureau/refs/heads/main/openapi/census-data-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [A P I Key Signup](https://api.census.gov/data/key_signup.html)
+- [Data Sets](https://www.census.gov/data/developers/data-sets.html)
+- [Discovery Tool](https://www.census.gov/data/developers/updates/new-discovery-tool.html)
+- [User Guide](https://www.census.gov/data/developers/guidance/api-user-guide.html)
+- [Example Queries](https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html)
+- [Postman Collection](collections/census-data-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/census-data-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### TIGERweb GeoServices REST API
 
+The TIGERweb GeoServices REST API provides access to Census Bureau geographic data including boundaries for states, counties, census tracts, block groups, and other geographic entities. Supports standard ArcGIS REST API queries for geographic features.
+
+- **Human URL:** [https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html](https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html)
 - **Base URL:** `https://tigerweb.geo.census.gov/arcgis/rest/services`
-- **Documentation:** [TIGERweb Main](https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html)
+
+#### Tags
+
+- Geography
+- GIS
+- Boundaries
+- Mapping
+
+#### Properties
+
+- [Documentation](https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html)
+- [Postman Collection](collections/census-data-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/census-data-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Census Geocoding Services
 
+The Census Geocoding Services convert addresses to geographic coordinates and census geography identifiers. Supports both single-address lookups and batch geocoding for large address lists.
+
+- **Human URL:** [https://geocoding.geo.census.gov/geocoder/](https://geocoding.geo.census.gov/geocoder/)
 - **Base URL:** `https://geocoding.geo.census.gov/geocoder`
-- **Documentation:** [Census Geocoder](https://geocoding.geo.census.gov/geocoder/)
 
-## Artifacts
+#### Tags
 
-### OpenAPI Specifications
+- Geocoding
+- Geography
+- Address
 
-- [census-data-api-openapi.yml](openapi/census-data-api-openapi.yml) — OpenAPI 3.1 specification covering the Census Data API including ACS, Decennial Census, Population Estimates, County Business Patterns, Economic Census, International Trade, and Geocoding endpoints.
+#### Properties
 
-### Examples
+- [Documentation](https://geocoding.geo.census.gov/geocoder/)
+- [Batch Geocoding](https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html)
+- [Postman Collection](collections/census-data-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/census-data-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-- [census-data-api-getACS5Year-example.json](examples/census-data-api-getACS5Year-example.json) — Example ACS 5-Year query for population, income, and home values by county.
-- [census-data-api-geocodeAddress-example.json](examples/census-data-api-geocodeAddress-example.json) — Example geocoding request returning coordinates and census geography for an address.
-- [census-data-api-getCountyBusinessPatterns-example.json](examples/census-data-api-getCountyBusinessPatterns-example.json) — Example County Business Patterns query for technology industry by state.
+## Common Properties
 
-### Spectral Rules
+- [LinkedIn](https://www.linkedin.com/company/us-census-bureau)
+- [Website](https://www.census.gov/)
+- [Developer Portal](https://www.census.gov/data/developers.html)
+- [A P I Key Signup](https://api.census.gov/data/key_signup.html)
+- [Data Explorer](https://data.census.gov/)
+- [Git Hub](https://github.com/uscensusbureau)
+- [Forum](https://apiforum.uscensusbureau.com/)
+- [Newsletter](https://public.govdelivery.com/accounts/USCENSUS/subscriber/new?topic_id=USCENSUS_11933)
+- [L L Ms Txt](https://api.census.gov/llms.txt)
 
-- [census-data-api-rules.yml](rules/census-data-api-rules.yml) — Spectral ruleset enforcing Census API documentation standards including required parameters, geography documentation, and response schema definitions.
+## Maintainers
 
-### Capabilities
-
-- [demographic-research.yaml](capabilities/demographic-research.yaml) — Naftiko workflow capability for Census Bureau demographic research, providing unified REST and MCP access to ACS, population estimates, decennial census, and economic data.
-- [capabilities/shared/census-data-api.yaml](capabilities/shared/census-data-api.yaml) — Shared per-API Naftiko capability definition for the Census Data API.
-
-### JSON Schema
-
-- [census-data-api-response-schema.json](json-schema/census-data-api-response-schema.json) — JSON Schema for the standard Census 2D array API response format.
-- [census-data-api-geocode-schema.json](json-schema/census-data-api-geocode-schema.json) — JSON Schema for Census Geocoder API responses.
-
-### JSON Structure
-
-- [census-data-api-response-structure.json](json-structure/census-data-api-response-structure.json) — Structure documentation for the Census Data API 2D array response format.
-
-### JSON-LD Context
-
-- [united-states-census-bureau-context.jsonld](json-ld/united-states-census-bureau-context.jsonld) — Linked data context aligning Census Bureau vocabulary with schema.org, SDMX statistical standards, and GeoSPARQL geographic ontologies.
-
-### Vocabulary
-
-- [united-states-census-bureau-vocabulary.yml](vocabulary/united-states-census-bureau-vocabulary.yml) — Domain vocabulary covering Census surveys, geographic hierarchy, statistical variables, API data structures, and demographic classification concepts.
-
-## Additional Resources
-
-| Resource | Link |
-|---|---|
-| Data Explorer | [data.census.gov](https://data.census.gov/) |
-| GitHub | [github.com/uscensusbureau](https://github.com/uscensusbureau) |
-| Developer Forum | [apiforum.uscensusbureau.com](https://apiforum.uscensusbureau.com/) |
-| Example Queries | [Example API Queries](https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html) |
-
-**Maintained by:** [API Evangelist](https://apievangelist.com)
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
