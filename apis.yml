@@ -6,7 +6,7 @@ description: >-
   social statistics. The Census Data API supports queries across datasets including the American Community Survey,
   Decennial Census, Population Estimates, County Business Patterns, Economic Census, and International Trade, with data
   available at national, state, county, tract, and block group geographic levels.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/united-states-census-bureau/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -26,7 +26,7 @@ apis:
       Users can query demographic, economic, housing, and social data by geographic level and filter using hundreds of
       statistical variables. Datasets include the American Community Survey (ACS), Decennial Census, Population
       Estimates, County Business Patterns, Economic Census, International Trade, and more.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.census.gov/data/developers.html
     baseURL: https://api.census.gov/data
     tags:
@@ -56,7 +56,7 @@ apis:
       The TIGERweb GeoServices REST API provides access to Census Bureau geographic data including boundaries for
       states, counties, census tracts, block groups, and other geographic entities. Supports standard ArcGIS REST API
       queries for geographic features.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html
     baseURL: https://tigerweb.geo.census.gov/arcgis/rest/services
     tags:
@@ -72,7 +72,7 @@ apis:
     description: >-
       The Census Geocoding Services convert addresses to geographic coordinates and census geography identifiers.
       Supports both single-address lookups and batch geocoding for large address lists.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://geocoding.geo.census.gov/geocoder/
     baseURL: https://geocoding.geo.census.gov/geocoder
     tags:
