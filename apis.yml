@@ -98,11 +98,11 @@ common:
     url: https://data.census.gov/
   - type: GitHub
     url: https://github.com/uscensusbureau
-  - type: Forum
+  - type: Forums
     url: https://apiforum.uscensusbureau.com/
   - type: Newsletter
     url: https://public.govdelivery.com/accounts/USCENSUS/subscriber/new?topic_id=USCENSUS_11933
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://api.census.gov/llms.txt
 maintainers:
   - FN: Kin Lane
