@@ -1,0 +1,114 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/census-data-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 10
+  by_action_class:
+    connected: 10
+  by_consequence:
+    read: 10
+  human_in_the_loop_required: 0
+operations:
+- path: /{year}/acs/acs1
+  method: get
+  operationId: getACS1Year
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{year}/acs/acs5
+  method: get
+  operationId: getACS5Year
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{year}/dec/pl
+  method: get
+  operationId: getDecennialPL
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{year}/pep/population
+  method: get
+  operationId: getPopulationEstimates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{year}/cbp
+  method: get
+  operationId: getCountyBusinessPatterns
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{year}/ecnbasic
+  method: get
+  operationId: getEconomicCensus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{year}/intltrade/imp_exp
+  method: get
+  operationId: getInternationalTrade
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{year}/idb/5year
+  method: get
+  operationId: getInternationalDatabase
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /geocoder/locations/onelineaddress
+  method: get
+  operationId: geocodeOnelineAddress
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /geocoder/locations/address
+  method: get
+  operationId: geocodeAddress
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
