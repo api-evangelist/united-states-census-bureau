@@ -1,0 +1,187 @@
+openapi: 3.1.0
+info:
+  title: Census Data American Community Survey Geographic Services API
+  description: The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. The API covers demographic, economic, housing, and social data through a query-based interface. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and many more. Users can query data by geographic level (national, state, county, tract, block group) and filter by hundreds of statistical variables. An API key is optional (up to 500 requests/day without one) but required for higher usage.
+  version: 2.0.0
+  contact:
+    name: Census Developer Forum
+    url: https://www.census.gov/data/developers.html
+    email: cnmp.developers.list@census.gov
+  x-tags:
+  - Demographics
+  - Federal Government
+  - Open Data
+  - Statistics
+servers:
+- url: https://api.census.gov/data
+  description: Census Data API
+tags:
+- name: Geographic Services
+  description: Geocoding and geographic boundary services
+paths:
+  /geocoder/locations/onelineaddress:
+    get:
+      operationId: geocodeOnelineAddress
+      summary: Geocode One-Line Address
+      description: Converts a one-line address string to geographic coordinates and census geography identifiers (state, county, tract, block FIPS codes).
+      tags:
+      - Geographic Services
+      parameters:
+      - name: address
+        in: query
+        required: true
+        description: Full address as a single string (e.g., "4600 Silver Hill Rd, Washington DC 20233")
+        schema:
+          type: string
+      - name: benchmark
+        in: query
+        required: true
+        description: The geocoding benchmark to use (e.g., Public_AR_Current, Public_AR_Census2020)
+        schema:
+          type: string
+          default: Public_AR_Current
+      - name: vintage
+        in: query
+        required: false
+        description: Geographic vintage for returned geography identifiers (e.g., Current_Current, Census2020_Census2020)
+        schema:
+          type: string
+      - name: format
+        in: query
+        required: false
+        description: Response format
+        schema:
+          type: string
+          enum:
+          - json
+      - name: layers
+        in: query
+        required: false
+        description: Geographic layers to include in the response
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Geocoding result with coordinates and census geography
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /geocoder/locations/address:
+    get:
+      operationId: geocodeAddress
+      summary: Geocode Structured Address
+      description: Converts a structured address (street, city, state, ZIP) to geographic coordinates and census geography identifiers.
+      tags:
+      - Geographic Services
+      parameters:
+      - name: street
+        in: query
+        required: true
+        description: Street address (e.g., "4600 Silver Hill Rd")
+        schema:
+          type: string
+      - name: city
+        in: query
+        required: false
+        description: City name
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        description: Two-character state abbreviation or FIPS code
+        schema:
+          type: string
+      - name: zip
+        in: query
+        required: false
+        description: Five-digit ZIP code
+        schema:
+          type: string
+      - name: benchmark
+        in: query
+        required: true
+        description: Geocoding benchmark to use
+        schema:
+          type: string
+          default: Public_AR_Current
+      - name: vintage
+        in: query
+        required: false
+        description: Geographic vintage for returned geography identifiers
+        schema:
+          type: string
+      - name: format
+        in: query
+        required: false
+        description: Response format
+        schema:
+          type: string
+          enum:
+          - json
+      responses:
+        '200':
+          description: Geocoding result with coordinates and census geography
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    GeocodeResponse:
+      type: object
+      properties:
+        result:
+          type: object
+          properties:
+            input:
+              type: object
+              description: The input address that was geocoded
+            addressMatches:
+              type: array
+              description: Array of matched addresses
+              items:
+                $ref: '#/components/schemas/GeocodeAddressMatch'
+    GeocodeCoordinates:
+      type: object
+      properties:
+        x:
+          type: number
+          format: double
+          description: Longitude
+        y:
+          type: number
+          format: double
+          description: Latitude
+    GeocodeAddressMatch:
+      type: object
+      properties:
+        tigerLineId:
+          type: string
+          description: TIGER/Line ID of the matched road segment
+        side:
+          type: string
+          description: Side of the road (L or R)
+        matchedAddress:
+          type: string
+          description: Standardized matched address string
+        coordinates:
+          $ref: '#/components/schemas/GeocodeCoordinates'
+        addressComponents:
+          type: object
+          description: Parsed address components
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters, missing required fields, or variable not found
+      content:
+        text/html:
+          schema:
+            type: string
+externalDocs:
+  description: Census Data API User Guide
+  url: https://www.census.gov/data/developers/guidance/api-user-guide.html
