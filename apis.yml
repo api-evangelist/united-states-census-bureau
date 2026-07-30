@@ -6,7 +6,19 @@ description: >-
   social statistics. The Census Data API supports queries across datasets including the American Community Survey,
   Decennial Census, Population Estimates, County Business Patterns, Economic Census, and International Trade, with data
   available at national, state, county, tract, and block group geographic levels.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/united-states-census-bureau.png
 url: https://raw.githubusercontent.com/api-evangelist/united-states-census-bureau/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -19,72 +31,195 @@ tags:
   - Economics
   - Population
 apis:
-  - aid: united-states-census-bureau:census-data-api
-    name: Census Data API
-    description: >-
-      The Census Data API provides programmatic access to statistical data from Census Bureau surveys and datasets.
-      Users can query demographic, economic, housing, and social data by geographic level and filter using hundreds of
-      statistical variables. Datasets include the American Community Survey (ACS), Decennial Census, Population
-      Estimates, County Business Patterns, Economic Census, International Trade, and more.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.census.gov/data/developers.html
-    baseURL: https://api.census.gov/data
-    tags:
-      - Demographics
-      - Statistics
-      - Open Data
-      - REST API
-    properties:
-      - type: Documentation
-        url: https://www.census.gov/data/developers.html
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/united-states-census-bureau/refs/heads/main/openapi/census-data-api-openapi.yml
-      - type: APIKeySignup
-        url: https://api.census.gov/data/key_signup.html
-      - type: DataSets
-        url: https://www.census.gov/data/developers/data-sets.html
-      - type: DiscoveryTool
-        url: https://www.census.gov/data/developers/updates/new-discovery-tool.html
-      - type: UserGuide
-        url: https://www.census.gov/data/developers/guidance/api-user-guide.html
-      - type: ExampleQueries
-        url: https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html
-  - aid: united-states-census-bureau:tigerweb-rest-api
-    name: TIGERweb GeoServices REST API
-    description: >-
-      The TIGERweb GeoServices REST API provides access to Census Bureau geographic data including boundaries for
-      states, counties, census tracts, block groups, and other geographic entities. Supports standard ArcGIS REST API
-      queries for geographic features.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html
-    baseURL: https://tigerweb.geo.census.gov/arcgis/rest/services
-    tags:
-      - Geography
-      - GIS
-      - Boundaries
-      - Mapping
-    properties:
-      - type: Documentation
-        url: https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html
-  - aid: united-states-census-bureau:geocoding-api
-    name: Census Geocoding Services
-    description: >-
-      The Census Geocoding Services convert addresses to geographic coordinates and census geography identifiers.
-      Supports both single-address lookups and batch geocoding for large address lists.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://geocoding.geo.census.gov/geocoder/
-    baseURL: https://geocoding.geo.census.gov/geocoder
-    tags:
-      - Geocoding
-      - Geography
-      - Address
-    properties:
-      - type: Documentation
-        url: https://geocoding.geo.census.gov/geocoder/
-      - type: BatchGeocoding
-        url: >-
-          https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html
+- aid: united-states-census-bureau:tigerweb-rest-api
+  name: TIGERweb GeoServices REST API
+  description: >-
+    The TIGERweb GeoServices REST API provides access to Census Bureau geographic data including boundaries
+    for states, counties, census tracts, block groups, and other geographic entities. Supports standard
+    ArcGIS REST API queries for geographic features.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html
+  baseURL: https://tigerweb.geo.census.gov/arcgis/rest/services
+  tags:
+  - Geography
+  - GIS
+  - Boundaries
+  - Mapping
+  properties:
+  - type: Documentation
+    url: https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_main.html
+- aid: united-states-census-bureau:geocoding-api
+  name: Census Geocoding Services
+  description: >-
+    The Census Geocoding Services convert addresses to geographic coordinates and census geography identifiers.
+    Supports both single-address lookups and batch geocoding for large address lists.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://geocoding.geo.census.gov/geocoder/
+  baseURL: https://geocoding.geo.census.gov/geocoder
+  tags:
+  - Geocoding
+  - Geography
+  - Address
+  properties:
+  - type: Documentation
+    url: https://geocoding.geo.census.gov/geocoder/
+  - type: BatchGeocoding
+    url: >-
+      https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html
+- aid: united-states-census-bureau:united-states-census-bureau-american-community-survey-api
+  name: United States Census Bureau American Community Survey API
+  description: ACS demographic, economic, social, and housing characteristics
+  humanURL: https://www.census.gov/data/developers.html
+  baseURL: https://api.census.gov/data
+  tags:
+  - American Community Survey
+  properties:
+  - type: OpenAPI
+    url: openapi/united-states-census-bureau-american-community-survey-api-openapi.yml
+  - type: Documentation
+    url: https://www.census.gov/data/developers.html
+  - type: APIKeySignup
+    url: https://api.census.gov/data/key_signup.html
+  - type: DataSets
+    url: https://www.census.gov/data/developers/data-sets.html
+  - type: DiscoveryTool
+    url: https://www.census.gov/data/developers/updates/new-discovery-tool.html
+  - type: UserGuide
+    url: https://www.census.gov/data/developers/guidance/api-user-guide.html
+  - type: ExampleQueries
+    url: https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html
+- aid: united-states-census-bureau:united-states-census-bureau-county-business-patterns-api
+  name: United States Census Bureau County Business Patterns API
+  description: Business establishment and employment data
+  humanURL: https://www.census.gov/data/developers.html
+  baseURL: https://api.census.gov/data
+  tags:
+  - County Business Patterns
+  properties:
+  - type: OpenAPI
+    url: openapi/united-states-census-bureau-county-business-patterns-api-openapi.yml
+  - type: Documentation
+    url: https://www.census.gov/data/developers.html
+  - type: APIKeySignup
+    url: https://api.census.gov/data/key_signup.html
+  - type: DataSets
+    url: https://www.census.gov/data/developers/data-sets.html
+  - type: DiscoveryTool
+    url: https://www.census.gov/data/developers/updates/new-discovery-tool.html
+  - type: UserGuide
+    url: https://www.census.gov/data/developers/guidance/api-user-guide.html
+  - type: ExampleQueries
+    url: https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html
+- aid: united-states-census-bureau:united-states-census-bureau-decennial-census-api
+  name: United States Census Bureau Decennial Census API
+  description: Decennial Census population and housing counts
+  humanURL: https://www.census.gov/data/developers.html
+  baseURL: https://api.census.gov/data
+  tags:
+  - Decennial Census
+  properties:
+  - type: OpenAPI
+    url: openapi/united-states-census-bureau-decennial-census-api-openapi.yml
+  - type: Documentation
+    url: https://www.census.gov/data/developers.html
+  - type: APIKeySignup
+    url: https://api.census.gov/data/key_signup.html
+  - type: DataSets
+    url: https://www.census.gov/data/developers/data-sets.html
+  - type: DiscoveryTool
+    url: https://www.census.gov/data/developers/updates/new-discovery-tool.html
+  - type: UserGuide
+    url: https://www.census.gov/data/developers/guidance/api-user-guide.html
+  - type: ExampleQueries
+    url: https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html
+- aid: united-states-census-bureau:united-states-census-bureau-economic-census-api
+  name: United States Census Bureau Economic Census API
+  description: Economic activity by industry and geography
+  humanURL: https://www.census.gov/data/developers.html
+  baseURL: https://api.census.gov/data
+  tags:
+  - Economic Census
+  properties:
+  - type: OpenAPI
+    url: openapi/united-states-census-bureau-economic-census-api-openapi.yml
+  - type: Documentation
+    url: https://www.census.gov/data/developers.html
+  - type: APIKeySignup
+    url: https://api.census.gov/data/key_signup.html
+  - type: DataSets
+    url: https://www.census.gov/data/developers/data-sets.html
+  - type: DiscoveryTool
+    url: https://www.census.gov/data/developers/updates/new-discovery-tool.html
+  - type: UserGuide
+    url: https://www.census.gov/data/developers/guidance/api-user-guide.html
+  - type: ExampleQueries
+    url: https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html
+- aid: united-states-census-bureau:united-states-census-bureau-geographic-services-api
+  name: United States Census Bureau Geographic Services API
+  description: Geocoding and geographic boundary services
+  humanURL: https://www.census.gov/data/developers.html
+  baseURL: https://api.census.gov/data
+  tags:
+  - Geographic Services
+  properties:
+  - type: OpenAPI
+    url: openapi/united-states-census-bureau-geographic-services-api-openapi.yml
+  - type: Documentation
+    url: https://www.census.gov/data/developers.html
+  - type: APIKeySignup
+    url: https://api.census.gov/data/key_signup.html
+  - type: DataSets
+    url: https://www.census.gov/data/developers/data-sets.html
+  - type: DiscoveryTool
+    url: https://www.census.gov/data/developers/updates/new-discovery-tool.html
+  - type: UserGuide
+    url: https://www.census.gov/data/developers/guidance/api-user-guide.html
+  - type: ExampleQueries
+    url: https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html
+- aid: united-states-census-bureau:united-states-census-bureau-international-api
+  name: United States Census Bureau International API
+  description: International demographic and trade data
+  humanURL: https://www.census.gov/data/developers.html
+  baseURL: https://api.census.gov/data
+  tags:
+  - International
+  properties:
+  - type: OpenAPI
+    url: openapi/united-states-census-bureau-international-api-openapi.yml
+  - type: Documentation
+    url: https://www.census.gov/data/developers.html
+  - type: APIKeySignup
+    url: https://api.census.gov/data/key_signup.html
+  - type: DataSets
+    url: https://www.census.gov/data/developers/data-sets.html
+  - type: DiscoveryTool
+    url: https://www.census.gov/data/developers/updates/new-discovery-tool.html
+  - type: UserGuide
+    url: https://www.census.gov/data/developers/guidance/api-user-guide.html
+  - type: ExampleQueries
+    url: https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html
+- aid: united-states-census-bureau:united-states-census-bureau-population-estimates-api
+  name: United States Census Bureau Population Estimates API
+  description: Annual population estimates and projections
+  humanURL: https://www.census.gov/data/developers.html
+  baseURL: https://api.census.gov/data
+  tags:
+  - Population Estimates
+  properties:
+  - type: OpenAPI
+    url: openapi/united-states-census-bureau-population-estimates-api-openapi.yml
+  - type: Documentation
+    url: https://www.census.gov/data/developers.html
+  - type: APIKeySignup
+    url: https://api.census.gov/data/key_signup.html
+  - type: DataSets
+    url: https://www.census.gov/data/developers/data-sets.html
+  - type: DiscoveryTool
+    url: https://www.census.gov/data/developers/updates/new-discovery-tool.html
+  - type: UserGuide
+    url: https://www.census.gov/data/developers/guidance/api-user-guide.html
+  - type: ExampleQueries
+    url: https://www.census.gov/data/developers/guidance/api-user-guide/example-api-queries.html
 common:
   - type: AgenticAccess
     url: agentic-access/united-states-census-bureau-agentic-access.yml
