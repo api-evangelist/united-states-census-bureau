@@ -1,0 +1,26 @@
+{
+  "provider": "united-states-census-bureau",
+  "sources": [
+    "united-states-census-bureau-american-community-survey-api-openapi.yml",
+    "united-states-census-bureau-county-business-patterns-api-openapi.yml",
+    "united-states-census-bureau-decennial-census-api-openapi.yml",
+    "united-states-census-bureau-economic-census-api-openapi.yml",
+    "united-states-census-bureau-geographic-services-api-openapi.yml",
+    "united-states-census-bureau-international-api-openapi.yml",
+    "united-states-census-bureau-population-estimates-api-openapi.yml"
+  ],
+  "outputs": [
+    "united-states-census-bureau-american-community-survey-api-openapi.yml",
+    "united-states-census-bureau-county-business-patterns-api-openapi.yml",
+    "united-states-census-bureau-decennial-census-api-openapi.yml",
+    "united-states-census-bureau-economic-census-api-openapi.yml",
+    "united-states-census-bureau-geographic-services-api-openapi.yml",
+    "united-states-census-bureau-international-api-openapi.yml",
+    "united-states-census-bureau-population-estimates-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
