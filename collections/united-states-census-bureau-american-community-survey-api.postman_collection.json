@@ -1,0 +1,420 @@
+{
+  "item": [
+    {
+      "id": "94771434-cb22-468f-b1d1-8886fa316929",
+      "name": "American Community Survey",
+      "description": {
+        "content": "ACS demographic, economic, social, and housing characteristics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7bcab5b5-1970-4ae9-9894-9d3620a46b10",
+          "name": "Get ACS 1-Year Data",
+          "request": {
+            "name": "Get ACS 1-Year Data",
+            "description": {
+              "content": "Returns American Community Survey 1-Year Estimates for geographies with populations of 65,000 or more. Covers social, economic, demographic, and housing characteristics. Data available from 2005 to present.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":year",
+                "acs",
+                "acs1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "get",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of variable names to retrieve (e.g., NAME,B01003_001E for name and total population). Maximum 50 variables per query."
+                },
+                {
+                  "disabled": false,
+                  "key": "for",
+                  "value": "<string>",
+                  "description": "Geographic level and FIPS code filter (e.g., state:01 for Alabama, county:*&in=state:06 for all CA counties)"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "<string>",
+                  "description": "Parent geography constraint for sub-state geographies (e.g., state:06 to restrict to California)"
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "Census API key for higher usage limits (500+ requests/day)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "year",
+                  "description": "(Required) Data year (2005-2024)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60538688-276c-4d10-8817-0d9508a2355f",
+              "name": "2D JSON array where the first row contains variable names and subsequent rows contain data values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "acs",
+                    "acs1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Data year (2005-2024)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80954b94-69ca-4710-92a6-c4cee673d406",
+              "name": "Bad request — invalid parameters, missing required fields, or variable not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "acs",
+                    "acs1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Data year (2005-2024)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd963755-637f-43f1-ae72-8aff77916c13",
+          "name": "Get ACS 5-Year Data",
+          "request": {
+            "name": "Get ACS 5-Year Data",
+            "description": {
+              "content": "Returns American Community Survey 5-Year Estimates for all geographies down to block group level. More reliable for small populations and small geographies. Data available from 2009 to present.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":year",
+                "acs",
+                "acs5"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "get",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated variable names (e.g., NAME,B01003_001E,B19013_001E for name, total population, and median household income)"
+                },
+                {
+                  "disabled": false,
+                  "key": "for",
+                  "value": "<string>",
+                  "description": "Geographic level and FIPS code filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "<string>",
+                  "description": "Parent geography constraint"
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "Census API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "year",
+                  "description": "(Required) End year of the 5-year period (2009-2024)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "795d631e-05eb-4846-b292-8764a281881c",
+              "name": "2D JSON array of ACS 5-Year data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "acs",
+                    "acs5"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) End year of the 5-year period (2009-2024)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d881fda3-ea6c-4264-80ff-01b1fe371056",
+              "name": "Bad request — invalid parameters, missing required fields, or variable not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "acs",
+                    "acs5"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) End year of the 5-year period (2009-2024)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.census.gov/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1500158c-2401-4558-9f2d-9e11809a7a34",
+    "name": "Census Data American Community Survey API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. The API covers demographic, economic, housing, and social data through a query-based interface. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and many more. Users can query data by geographic level (national, state, county, tract, block group) and filter by hundreds of statistical variables. An API key is optional (up to 500 requests/day without one) but required for higher usage.\n\nContact Support:\n Name: Census Developer Forum\n Email: cnmp.developers.list@census.gov",
+      "type": "text/plain"
+    }
+  }
+}

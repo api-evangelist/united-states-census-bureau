@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Census Data American Community Survey API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "American Community Survey",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get ACS 1-Year Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/acs/acs1",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Data year (2005-2024)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of variable names to retrieve (e.g., NAME,B01003_001E for name and total population). Maximum 50 variables per query."
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS code filter (e.g., state:01 for Alabama, county:*&in=state:06 for all CA counties)"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint for sub-state geographies (e.g., state:06 to restrict to California)"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key for higher usage limits (500+ requests/day)"
+              }
+            ]
+          },
+          "docs": "Returns American Community Survey 1-Year Estimates for geographies with populations of 65,000 or more. Covers social, economic, demographic, and housing characteristics. Data available from 2005 to present."
+        },
+        {
+          "info": {
+            "name": "Get ACS 5-Year Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/acs/acs5",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "End year of the 5-year period (2009-2024)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated variable names (e.g., NAME,B01003_001E,B19013_001E for name, total population, and median household income)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS code filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns American Community Survey 5-Year Estimates for all geographies down to block group level. More reliable for small populations and small geographies. Data available from 2009 to present."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

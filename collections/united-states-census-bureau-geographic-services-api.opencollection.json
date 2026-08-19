@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Census Data American Community Survey Geographic Services API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geographic Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Geocode One-Line Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/geocoder/locations/onelineaddress",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Full address as a single string (e.g., \"4600 Silver Hill Rd, Washington DC 20233\")"
+              },
+              {
+                "name": "benchmark",
+                "value": "",
+                "type": "query",
+                "description": "The geocoding benchmark to use (e.g., Public_AR_Current, Public_AR_Census2020)"
+              },
+              {
+                "name": "vintage",
+                "value": "",
+                "type": "query",
+                "description": "Geographic vintage for returned geography identifiers (e.g., Current_Current, Census2020_Census2020)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "layers",
+                "value": "",
+                "type": "query",
+                "description": "Geographic layers to include in the response"
+              }
+            ]
+          },
+          "docs": "Converts a one-line address string to geographic coordinates and census geography identifiers (state, county, tract, block FIPS codes)."
+        },
+        {
+          "info": {
+            "name": "Geocode Structured Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/geocoder/locations/address",
+            "params": [
+              {
+                "name": "street",
+                "value": "",
+                "type": "query",
+                "description": "Street address (e.g., \"4600 Silver Hill Rd\")"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City name"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Two-character state abbreviation or FIPS code"
+              },
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "Five-digit ZIP code"
+              },
+              {
+                "name": "benchmark",
+                "value": "",
+                "type": "query",
+                "description": "Geocoding benchmark to use"
+              },
+              {
+                "name": "vintage",
+                "value": "",
+                "type": "query",
+                "description": "Geographic vintage for returned geography identifiers"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Converts a structured address (street, city, state, ZIP) to geographic coordinates and census geography identifiers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Census Data American Community Survey Economic Census API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Economic Census",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Economic Census Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/ecnbasic",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Economic Census year (2002, 2007, 2012, 2017, 2022)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names to retrieve"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns economic census data covering all major economic sectors every 5 years. Provides number of establishments, employment, payroll, and sales/receipts by industry (NAICS) and geography."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

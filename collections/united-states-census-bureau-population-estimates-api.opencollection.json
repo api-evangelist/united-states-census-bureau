@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Census Data American Community Survey Population Estimates API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Population Estimates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Population Estimates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/pep/population",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Vintage year for the estimates"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., NAME,POP,DATE_DESC for name, population, and date description)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns annual population estimates for states, counties, and metropolitan areas. Uses births, deaths, and migration to estimate population change between decennial censuses."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Census Data American Community Survey International API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "International",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get International Trade Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/intltrade/imp_exp",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Data year (2010-present)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., CTY_NAME,AIR_VAL_MO for country and airborne value)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic filter"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns monthly and annual statistics on U.S. imports and exports by commodity, country, and port. Data available from 2010 to present."
+        },
+        {
+          "info": {
+            "name": "Get International Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/idb/5year",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Data year"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., NAME,POP for country name and population)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic filter (e.g., country:01 for Afghanistan)"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns demographic data for countries and areas with populations of 5,000 or more. Includes historical and projected data through 2100 with population by age and sex, births, deaths, migration, and more."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

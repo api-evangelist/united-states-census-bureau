@@ -1,0 +1,428 @@
+{
+  "item": [
+    {
+      "id": "54378d46-f785-40cc-989d-dd54d25a0de9",
+      "name": "Geographic Services",
+      "description": {
+        "content": "Geocoding and geographic boundary services",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fd711b2a-a0b7-4aab-b5ae-b1fcc91960b5",
+          "name": "Geocode One-Line Address",
+          "request": {
+            "name": "Geocode One-Line Address",
+            "description": {
+              "content": "Converts a one-line address string to geographic coordinates and census geography identifiers (state, county, tract, block FIPS codes).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geocoder",
+                "locations",
+                "onelineaddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Full address as a single string (e.g., \"4600 Silver Hill Rd, Washington DC 20233\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "benchmark",
+                  "value": "Public_AR_Current",
+                  "description": "(Required) The geocoding benchmark to use (e.g., Public_AR_Current, Public_AR_Census2020)"
+                },
+                {
+                  "disabled": false,
+                  "key": "vintage",
+                  "value": "<string>",
+                  "description": "Geographic vintage for returned geography identifiers (e.g., Current_Current, Census2020_Census2020)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "layers",
+                  "value": "<string>",
+                  "description": "Geographic layers to include in the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d98704e9-4505-4840-9fbc-463fe37d7453",
+              "name": "Geocoding result with coordinates and census geography",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoder",
+                    "locations",
+                    "onelineaddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "benchmark",
+                      "value": "Public_AR_Current"
+                    },
+                    {
+                      "key": "vintage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"input\": {},\n    \"addressMatches\": [\n      {\n        \"tigerLineId\": \"string\",\n        \"side\": \"string\",\n        \"matchedAddress\": \"string\",\n        \"coordinates\": {\n          \"x\": 1614.481355169628,\n          \"y\": 9793.607493654385\n        },\n        \"addressComponents\": {}\n      },\n      {\n        \"tigerLineId\": \"string\",\n        \"side\": \"string\",\n        \"matchedAddress\": \"string\",\n        \"coordinates\": {\n          \"x\": 6692.448895363093,\n          \"y\": 7438.191159793909\n        },\n        \"addressComponents\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce10d9ed-8eb4-4ce3-af75-4bec23d92423",
+              "name": "Bad request — invalid parameters, missing required fields, or variable not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoder",
+                    "locations",
+                    "onelineaddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "benchmark",
+                      "value": "Public_AR_Current"
+                    },
+                    {
+                      "key": "vintage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55e9369c-6524-476b-8d2a-54e176f731e9",
+          "name": "Geocode Structured Address",
+          "request": {
+            "name": "Geocode Structured Address",
+            "description": {
+              "content": "Converts a structured address (street, city, state, ZIP) to geographic coordinates and census geography identifiers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geocoder",
+                "locations",
+                "address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "street",
+                  "value": "<string>",
+                  "description": "(Required) Street address (e.g., \"4600 Silver Hill Rd\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "City name"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Two-character state abbreviation or FIPS code"
+                },
+                {
+                  "disabled": false,
+                  "key": "zip",
+                  "value": "<string>",
+                  "description": "Five-digit ZIP code"
+                },
+                {
+                  "disabled": false,
+                  "key": "benchmark",
+                  "value": "Public_AR_Current",
+                  "description": "(Required) Geocoding benchmark to use"
+                },
+                {
+                  "disabled": false,
+                  "key": "vintage",
+                  "value": "<string>",
+                  "description": "Geographic vintage for returned geography identifiers"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9642b4ca-01b1-4be6-a25f-664ba683890b",
+              "name": "Geocoding result with coordinates and census geography",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoder",
+                    "locations",
+                    "address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "street",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "benchmark",
+                      "value": "Public_AR_Current"
+                    },
+                    {
+                      "key": "vintage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"input\": {},\n    \"addressMatches\": [\n      {\n        \"tigerLineId\": \"string\",\n        \"side\": \"string\",\n        \"matchedAddress\": \"string\",\n        \"coordinates\": {\n          \"x\": 1614.481355169628,\n          \"y\": 9793.607493654385\n        },\n        \"addressComponents\": {}\n      },\n      {\n        \"tigerLineId\": \"string\",\n        \"side\": \"string\",\n        \"matchedAddress\": \"string\",\n        \"coordinates\": {\n          \"x\": 6692.448895363093,\n          \"y\": 7438.191159793909\n        },\n        \"addressComponents\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "581f89d4-81d8-41b6-b4f9-04cb3d7b6c65",
+              "name": "Bad request — invalid parameters, missing required fields, or variable not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoder",
+                    "locations",
+                    "address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "street",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "benchmark",
+                      "value": "Public_AR_Current"
+                    },
+                    {
+                      "key": "vintage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.census.gov/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8aa0cb52-2aae-4aa5-98a1-1e842478287b",
+    "name": "Census Data American Community Survey Geographic Services API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. The API covers demographic, economic, housing, and social data through a query-based interface. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and many more. Users can query data by geographic level (national, state, county, tract, block group) and filter by hundreds of statistical variables. An API key is optional (up to 500 requests/day without one) but required for higher usage.\n\nContact Support:\n Name: Census Developer Forum\n Email: cnmp.developers.list@census.gov",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "item": [
+    {
+      "id": "b56e9413-4901-45e5-8e23-10fd3e2cfaa2",
+      "name": "Decennial Census",
+      "description": {
+        "content": "Decennial Census population and housing counts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "37bfe58c-b44f-460a-999c-160b89c82f31",
+          "name": "Get Decennial Census Redistricting Data (P.L. 94-171)",
+          "request": {
+            "name": "Get Decennial Census Redistricting Data (P.L. 94-171)",
+            "description": {
+              "content": "Returns Decennial Census redistricting data including population counts by race/ethnicity and housing unit counts. Data available for 2020 and 2010.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":year",
+                "dec",
+                "pl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "get",
+                  "value": "<string>",
+                  "description": "(Required) Variable names (e.g., P1_001N for total population)"
+                },
+                {
+                  "disabled": false,
+                  "key": "for",
+                  "value": "<string>",
+                  "description": "Geographic level and FIPS filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "<string>",
+                  "description": "Parent geography constraint"
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "Census API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "year",
+                  "description": "(Required) Census year (2020 or 2010)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c161df0-4d16-4241-9f73-a79833709bad",
+              "name": "2D JSON array of decennial census data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "dec",
+                    "pl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Census year (2020 or 2010)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b539ecaf-9217-47e1-9579-ff6a00b52bdb",
+              "name": "Bad request — invalid parameters, missing required fields, or variable not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "dec",
+                    "pl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Census year (2020 or 2010)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.census.gov/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a5861305-d827-40bf-a49a-b1308060dfcd",
+    "name": "Census Data American Community Survey Decennial Census API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. The API covers demographic, economic, housing, and social data through a query-based interface. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and many more. Users can query data by geographic level (national, state, county, tract, block group) and filter by hundreds of statistical variables. An API key is optional (up to 500 requests/day without one) but required for higher usage.\n\nContact Support:\n Name: Census Developer Forum\n Email: cnmp.developers.list@census.gov",
+      "type": "text/plain"
+    }
+  }
+}

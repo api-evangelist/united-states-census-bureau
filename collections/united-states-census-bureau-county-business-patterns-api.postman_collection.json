@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "952edaba-df11-491e-88f6-1b41bfac51f6",
+      "name": "County Business Patterns",
+      "description": {
+        "content": "Business establishment and employment data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "acf6b736-1952-40cd-909a-6676f59d5a49",
+          "name": "Get County Business Patterns",
+          "request": {
+            "name": "Get County Business Patterns",
+            "description": {
+              "content": "Returns annual statistics on the number of establishments, employment, first quarter payroll, and annual payroll for most U.S. industries at the national, state, county, and ZIP code level.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":year",
+                "cbp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "get",
+                  "value": "<string>",
+                  "description": "(Required) Variable names (e.g., NAME,NAICS2017,ESTAB,EMP,PAYANN for business name, NAICS code, establishments, employment, annual payroll)"
+                },
+                {
+                  "disabled": false,
+                  "key": "for",
+                  "value": "<string>",
+                  "description": "Geographic level and FIPS filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "<string>",
+                  "description": "Parent geography constraint"
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "Census API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "year",
+                  "description": "(Required) Data year (1986-2022)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "629e7cd0-ac46-48b3-9591-480509354fa3",
+              "name": "2D JSON array of business patterns data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "cbp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Data year (1986-2022)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54411622-6bf3-4323-b7ab-de239b17e754",
+              "name": "Bad request — invalid parameters, missing required fields, or variable not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "cbp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Data year (1986-2022)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.census.gov/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5591e1f6-b17a-4580-a68b-916056f0ea43",
+    "name": "Census Data American Community Survey County Business Patterns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. The API covers demographic, economic, housing, and social data through a query-based interface. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and many more. Users can query data by geographic level (national, state, county, tract, block group) and filter by hundreds of statistical variables. An API key is optional (up to 500 requests/day without one) but required for higher usage.\n\nContact Support:\n Name: Census Developer Forum\n Email: cnmp.developers.list@census.gov",
+      "type": "text/plain"
+    }
+  }
+}

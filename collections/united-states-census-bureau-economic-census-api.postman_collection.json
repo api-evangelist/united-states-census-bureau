@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "37c061e7-fc8d-478b-8ab8-08447db2c2a4",
+      "name": "Economic Census",
+      "description": {
+        "content": "Economic activity by industry and geography",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9bfc9828-62da-47e7-bce2-9ea9d902e6ca",
+          "name": "Get Economic Census Data",
+          "request": {
+            "name": "Get Economic Census Data",
+            "description": {
+              "content": "Returns economic census data covering all major economic sectors every 5 years. Provides number of establishments, employment, payroll, and sales/receipts by industry (NAICS) and geography.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":year",
+                "ecnbasic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "get",
+                  "value": "<string>",
+                  "description": "(Required) Variable names to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "for",
+                  "value": "<string>",
+                  "description": "Geographic level and FIPS filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "<string>",
+                  "description": "Parent geography constraint"
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "Census API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "year",
+                  "description": "(Required) Economic Census year (2002, 2007, 2012, 2017, 2022)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a75905a-22c8-4611-b2d1-c59d1672eed3",
+              "name": "2D JSON array of economic census data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "ecnbasic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Economic Census year (2002, 2007, 2012, 2017, 2022)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a91367a-ddf2-4dca-9d9e-055835cde487",
+              "name": "Bad request — invalid parameters, missing required fields, or variable not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":year",
+                    "ecnbasic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "get",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "for",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Economic Census year (2002, 2007, 2012, 2017, 2022)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.census.gov/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "de88fbd7-6f3a-4f4d-a3f2-af39467c2156",
+    "name": "Census Data American Community Survey Economic Census API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. The API covers demographic, economic, housing, and social data through a query-based interface. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and many more. Users can query data by geographic level (national, state, county, tract, block group) and filter by hundreds of statistical variables. An API key is optional (up to 500 requests/day without one) but required for higher usage.\n\nContact Support:\n Name: Census Developer Forum\n Email: cnmp.developers.list@census.gov",
+      "type": "text/plain"
+    }
+  }
+}

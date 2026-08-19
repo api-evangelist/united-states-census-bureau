@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Census Data American Community Survey County Business Patterns API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "County Business Patterns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get County Business Patterns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.census.gov/data/:year/cbp",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Data year (1986-2022)"
+              },
+              {
+                "name": "get",
+                "value": "",
+                "type": "query",
+                "description": "Variable names (e.g., NAME,NAICS2017,ESTAB,EMP,PAYANN for business name, NAICS code, establishments, employment, annual payroll)"
+              },
+              {
+                "name": "for",
+                "value": "",
+                "type": "query",
+                "description": "Geographic level and FIPS filter"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "Parent geography constraint"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Census API key"
+              }
+            ]
+          },
+          "docs": "Returns annual statistics on the number of establishments, employment, first quarter payroll, and annual payroll for most U.S. industries at the national, state, county, and ZIP code level."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
