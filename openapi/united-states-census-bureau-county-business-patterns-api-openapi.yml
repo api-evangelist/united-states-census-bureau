@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Census Data American Community Survey County Business Patterns API
-  description: The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. The API covers demographic, economic, housing, and social data through a query-based interface. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and many more. Users can query data by geographic level (national, state, county, tract, block group) and filter by hundreds of statistical variables. An API key is optional (up to 500 requests/day without one) but required for higher usage.
+  title: Census Data County Business Patterns API
+  description: The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets.
   version: 2.0.0
   contact:
     name: Census Developer Forum
@@ -69,13 +69,6 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
-  responses:
-    BadRequest:
-      description: Bad request — invalid parameters, missing required fields, or variable not found
-      content:
-        text/html:
-          schema:
-            type: string
   schemas:
     DataAPIResponse:
       type: array
@@ -99,6 +92,13 @@ components:
       - - Arizona
         - '7151502'
         - '04'
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters, missing required fields, or variable not found
+      content:
+        text/html:
+          schema:
+            type: string
 externalDocs:
   description: Census Data API User Guide
   url: https://www.census.gov/data/developers/guidance/api-user-guide.html

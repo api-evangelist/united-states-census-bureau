@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Census Data American Community Survey Geographic Services API
-  description: The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets. The API covers demographic, economic, housing, and social data through a query-based interface. Key datasets include the American Community Survey (ACS), Decennial Census, Population Estimates, County Business Patterns, and many more. Users can query data by geographic level (national, state, county, tract, block group) and filter by hundreds of statistical variables. An API key is optional (up to 500 requests/day without one) but required for higher usage.
+  title: Census Data Geographic Services API
+  description: The United States Census Bureau Data API provides programmatic access to statistical data from Census Bureau surveys and datasets.
   version: 2.0.0
   contact:
     name: Census Developer Forum
@@ -133,6 +133,23 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
+    GeocodeAddressMatch:
+      type: object
+      properties:
+        tigerLineId:
+          type: string
+          description: TIGER/Line ID of the matched road segment
+        side:
+          type: string
+          description: Side of the road (L or R)
+        matchedAddress:
+          type: string
+          description: Standardized matched address string
+        coordinates:
+          $ref: '#/components/schemas/GeocodeCoordinates'
+        addressComponents:
+          type: object
+          description: Parsed address components
     GeocodeResponse:
       type: object
       properties:
@@ -158,23 +175,6 @@ components:
           type: number
           format: double
           description: Latitude
-    GeocodeAddressMatch:
-      type: object
-      properties:
-        tigerLineId:
-          type: string
-          description: TIGER/Line ID of the matched road segment
-        side:
-          type: string
-          description: Side of the road (L or R)
-        matchedAddress:
-          type: string
-          description: Standardized matched address string
-        coordinates:
-          $ref: '#/components/schemas/GeocodeCoordinates'
-        addressComponents:
-          type: object
-          description: Parsed address components
   responses:
     BadRequest:
       description: Bad request — invalid parameters, missing required fields, or variable not found
