@@ -36,7 +36,7 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 tags:
   - Demographics
-  - Federal-Government
+  - Federal Government
   - Open Data
   - Statistics
   - Economics
@@ -48,6 +48,7 @@ tags_raw:
   - Statistics
   - Economics
   - Population
+  - Federal-Government
 apis:
 - aid: united-states-census-bureau:tigerweb-rest-api
   name: TIGERweb GeoServices REST API

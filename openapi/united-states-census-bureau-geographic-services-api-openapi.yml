@@ -150,6 +150,17 @@ components:
         addressComponents:
           type: object
           description: Parsed address components
+    GeocodeCoordinates:
+      type: object
+      properties:
+        x:
+          type: number
+          format: double
+          description: Longitude
+        y:
+          type: number
+          format: double
+          description: Latitude
     GeocodeResponse:
       type: object
       properties:
@@ -164,17 +175,6 @@ components:
               description: Array of matched addresses
               items:
                 $ref: '#/components/schemas/GeocodeAddressMatch'
-    GeocodeCoordinates:
-      type: object
-      properties:
-        x:
-          type: number
-          format: double
-          description: Longitude
-        y:
-          type: number
-          format: double
-          description: Latitude
   responses:
     BadRequest:
       description: Bad request — invalid parameters, missing required fields, or variable not found

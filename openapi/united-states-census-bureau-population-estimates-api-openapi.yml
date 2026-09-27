@@ -67,6 +67,13 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters, missing required fields, or variable not found
+      content:
+        text/html:
+          schema:
+            type: string
   schemas:
     DataAPIResponse:
       type: array
@@ -90,13 +97,6 @@ components:
       - - Arizona
         - '7151502'
         - '04'
-  responses:
-    BadRequest:
-      description: Bad request — invalid parameters, missing required fields, or variable not found
-      content:
-        text/html:
-          schema:
-            type: string
 externalDocs:
   description: Census Data API User Guide
   url: https://www.census.gov/data/developers/guidance/api-user-guide.html
