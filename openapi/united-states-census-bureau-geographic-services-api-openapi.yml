@@ -133,6 +133,31 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
+    GeocodeResponse:
+      type: object
+      properties:
+        result:
+          type: object
+          properties:
+            input:
+              type: object
+              description: The input address that was geocoded
+            addressMatches:
+              type: array
+              description: Array of matched addresses
+              items:
+                $ref: '#/components/schemas/GeocodeAddressMatch'
+    GeocodeCoordinates:
+      type: object
+      properties:
+        x:
+          type: number
+          format: double
+          description: Longitude
+        y:
+          type: number
+          format: double
+          description: Latitude
     GeocodeAddressMatch:
       type: object
       properties:
@@ -150,31 +175,6 @@ components:
         addressComponents:
           type: object
           description: Parsed address components
-    GeocodeCoordinates:
-      type: object
-      properties:
-        x:
-          type: number
-          format: double
-          description: Longitude
-        y:
-          type: number
-          format: double
-          description: Latitude
-    GeocodeResponse:
-      type: object
-      properties:
-        result:
-          type: object
-          properties:
-            input:
-              type: object
-              description: The input address that was geocoded
-            addressMatches:
-              type: array
-              description: Array of matched addresses
-              items:
-                $ref: '#/components/schemas/GeocodeAddressMatch'
   responses:
     BadRequest:
       description: Bad request — invalid parameters, missing required fields, or variable not found
