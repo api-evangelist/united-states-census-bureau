@@ -132,7 +132,31 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters, missing required fields, or variable not found
+      content:
+        text/html:
+          schema:
+            type: string
   schemas:
+    GeocodeAddressMatch:
+      type: object
+      properties:
+        tigerLineId:
+          type: string
+          description: TIGER/Line ID of the matched road segment
+        side:
+          type: string
+          description: Side of the road (L or R)
+        matchedAddress:
+          type: string
+          description: Standardized matched address string
+        coordinates:
+          $ref: '#/components/schemas/GeocodeCoordinates'
+        addressComponents:
+          type: object
+          description: Parsed address components
     GeocodeResponse:
       type: object
       properties:
@@ -158,30 +182,6 @@ components:
           type: number
           format: double
           description: Latitude
-    GeocodeAddressMatch:
-      type: object
-      properties:
-        tigerLineId:
-          type: string
-          description: TIGER/Line ID of the matched road segment
-        side:
-          type: string
-          description: Side of the road (L or R)
-        matchedAddress:
-          type: string
-          description: Standardized matched address string
-        coordinates:
-          $ref: '#/components/schemas/GeocodeCoordinates'
-        addressComponents:
-          type: object
-          description: Parsed address components
-  responses:
-    BadRequest:
-      description: Bad request — invalid parameters, missing required fields, or variable not found
-      content:
-        text/html:
-          schema:
-            type: string
 externalDocs:
   description: Census Data API User Guide
   url: https://www.census.gov/data/developers/guidance/api-user-guide.html
